@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
+	id "org.sonarqube" version "3.0"
 }
 
 group = 'com.fatec'
@@ -10,6 +11,14 @@ sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "FatecSJC-PI-Time10_back-chat-app"
+    property "sonar.organization", "fatecsjc-pi-time10"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 dependencies {
