@@ -13,8 +13,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
-
-
 @SpringBootTest
 public class MessagesTests {
     @Autowired
@@ -24,7 +22,7 @@ public class MessagesTests {
     @InjectMocks
     MessagesServiceImpl messagesService;
 
-    final MessageModule stubMessage1 = new MessageModule(null, "Só era mais um silva");
+    final MessageModule stubMessage1 = new MessageModule(null, "Era só mais um silva");
 
     @Test
     public void contextLoads() throws Exception {
