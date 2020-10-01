@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
@@ -34,5 +37,13 @@ public class MessagesTests {
 
         assertEquals(stubMessage1.getId(), stub.getId());
         assertEquals(stubMessage1.getBody(), stub.getBody());
+    }
+
+    @Test
+    public  void testToGetAllMessages() {
+        final List<MessageModule> stub = messagesService.getAllMessages();
+
+        assertEquals(stubMessage1.getBody(), stub.get(0).getBody());
+        assertEquals(1, stub.size());
     }
 }

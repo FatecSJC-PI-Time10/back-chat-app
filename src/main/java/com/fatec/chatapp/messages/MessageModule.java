@@ -33,4 +33,12 @@ public class MessageModule {
     public void setBody(String body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        return "MessageModule{" +
+                "id='" + id + '\'' +
+                ", body='" + body + '\'' +
+                '}';
+    }
 }
