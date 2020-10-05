@@ -6,14 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class MessageModule {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MessageModel {
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String body;
 
-    public MessageModule() { }
+    public MessageModel() { }
 
-    public MessageModule(String id, String body) {
+    public MessageModel(String id, String body) {
         this.id = id;
         this.body = body;
     }

@@ -5,18 +5,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("Messages Service")
+@Service("messages")
 public class MessagesServiceImpl implements MessagesService {
     @Autowired
     MessagesRepository messagesRepository;
 
     @Override
-    public MessageModule createMessage(MessageModule m) {
+    public MessageModel createMessage(MessageModel m) {
         return messagesRepository.save(m);
     }
 
     @Override
-    public List<MessageModule> getAllMessages() {
+    public List<MessageModel> getAllMessages() {
         return messagesRepository.findAll();
     }
 }
