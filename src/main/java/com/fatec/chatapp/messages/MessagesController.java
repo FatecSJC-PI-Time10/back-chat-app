@@ -14,12 +14,12 @@ public class MessagesController {
     MessagesServiceImpl messagesService;
 
     @PostMapping("/messages")
-    MessageModule createMessage(@RequestBody MessageModule body) {
+    MessageModel createMessage(@RequestBody MessageModel body) {
         return messagesService.createMessage(body);
     }
 
     @GetMapping("/messages")
-    List<MessageModule> getAllMessages() {
+    List<MessageModel> getAllMessages() {
         return messagesService.getAllMessages();
     }
 }

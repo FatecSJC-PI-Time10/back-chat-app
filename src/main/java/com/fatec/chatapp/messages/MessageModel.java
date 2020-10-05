@@ -1,4 +1,4 @@
-package com.fatec.chatapp.chats;
+package com.fatec.chatapp.messages;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,27 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ChatModule {
-    @Id
+public class MessageModel {
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    private String nome;
-    private Boolean isActive;
+    private String body;
 
-    public Boolean getActive() {
-        return isActive;
-    }
+    public MessageModel() { }
 
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    public ChatModule() { }
-
-    public ChatModule(String id, String nome, Boolean isActive) {
+    public MessageModel(String id, String body) {
         this.id = id;
-        this.nome = nome;
-        this.isActive = isActive;
+        this.body = body;
     }
 
     public String getId() {
@@ -37,18 +27,19 @@ public class ChatModule {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getBody() {
+        return body;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override
     public String toString() {
         return "MessageModule{" +
                 "id='" + id + '\'' +
+                ", body='" + body + '\'' +
                 '}';
     }
 }

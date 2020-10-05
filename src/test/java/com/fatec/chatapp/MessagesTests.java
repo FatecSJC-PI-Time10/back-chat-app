@@ -1,6 +1,6 @@
 package com.fatec.chatapp;
 
-import com.fatec.chatapp.messages.MessageModule;
+import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.messages.MessagesController;
 import com.fatec.chatapp.messages.MessagesServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class MessagesTests {
     @InjectMocks
     MessagesServiceImpl messagesService;
 
-    final MessageModule stubMessage1 = new MessageModule(null, "Era só mais um silva");
+    final MessageModel stubMessage1 = new MessageModel(null, "Era só mais um silva");
 
     @Test
     public void contextLoads() throws Exception {
@@ -31,7 +31,7 @@ public class MessagesTests {
 
     @Test
     public void testToCreateMessage() {
-        final MessageModule stub = messagesService.createMessage(stubMessage1);
+        final MessageModel stub = messagesService.createMessage(stubMessage1);
 
         assertEquals(stubMessage1.getId(), stub.getId());
         assertEquals(stubMessage1.getBody(), stub.getBody());
@@ -39,7 +39,7 @@ public class MessagesTests {
 
     @Test
     public  void testToGetAllMessages() {
-        final List<MessageModule> stub = messagesService.getAllMessages();
+        final List<MessageModel> stub = messagesService.getAllMessages();
 
         assertEquals(stubMessage1.getBody(), stub.get(0).getBody());
         assertEquals(1, stub.size());

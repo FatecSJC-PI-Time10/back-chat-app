@@ -7,23 +7,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-public class ChatController {
+public class ChatsController {
 
     @Autowired
-    ChatServiceImpl chatService;
+    ChatsServiceImpl chatService;
 
-    @PostMapping("/chat")
-    public ChatModule createChat(@RequestBody ChatModule body){
+    @PostMapping("/chats")
+    public ChatModel createChat(@RequestBody ChatModel body){
         return chatService.createChat(body);
     }
 
-
-
-    @GetMapping("/chat")
-    public ChatModule getChat(){
-        return chatService.getChatById();
-
+    @GetMapping("/chats")
+    public List<ChatModel> getAllChats(){
+        return chatService.getAllChats();
     }
 
 
