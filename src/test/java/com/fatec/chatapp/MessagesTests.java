@@ -1,7 +1,6 @@
 package com.fatec.chatapp;
 
 import com.fatec.chatapp.messages.MessageModel;
-import com.fatec.chatapp.messages.MessagesController;
 import com.fatec.chatapp.messages.MessagesServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,22 +15,19 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class MessagesTests {
     @Autowired
-    private MessagesController controller;
-
-    @Autowired
     @InjectMocks
     MessagesServiceImpl messagesService;
 
-    final MessageModel stubMessage1 = new MessageModel(null, "Era só mais um silva");
+    final MessageModel stubMessage1 = new MessageModel("Era só mais um silva");
 
     @Test
     public void contextLoads() throws Exception {
-        assertThat(controller).isNotNull();
+        assertThat(messagesService).isNotNull();
     }
 
     @Test
     public void testToCreateMessage() {
-        final MessageModel stub = messagesService.createMessage(stubMessage1);
+        final MessageModel stub = messagesService.create(stubMessage1);
 
         assertEquals(stubMessage1.getId(), stub.getId());
         assertEquals(stubMessage1.getBody(), stub.getBody());
@@ -39,9 +35,18 @@ public class MessagesTests {
 
     @Test
     public  void testToGetAllMessages() {
-        final List<MessageModel> stub = messagesService.getAllMessages();
+        final List<MessageModel> stub = messagesService.getAll();
 
         assertEquals(stubMessage1.getBody(), stub.get(0).getBody());
         assertEquals(1, stub.size());
+    }
+
+    @Test
+    public void shouldFindOneById() {
+        final List<MessageModel> messages = messagesService.getAll();
+        final MessageModel message = messages.get(0);
+        final MessageModel stub = messagesService.findOneById(message.getId());
+
+        assertEquals(stubMessage1.getBody(), stub.getBody());
     }
 }

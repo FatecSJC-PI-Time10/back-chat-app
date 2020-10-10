@@ -12,18 +12,18 @@ public class ChatsServiceImpl implements ChatsService {
     private ChatsRepository chatsRepository;
 
     @Override
-    public ChatModel createChat(ChatModel body) {
+    public ChatModel create(ChatModel body) {
 
         return chatsRepository.save(body);
     }
 
     @Override
-    public List<ChatModel> getAllChats() {
+    public List<ChatModel> getAll() {
         return chatsRepository.findAll();
     }
 
     @Override
-    public ChatModel getChatById() {
+    public ChatModel findOneById() {
         return null;
     }
 }
