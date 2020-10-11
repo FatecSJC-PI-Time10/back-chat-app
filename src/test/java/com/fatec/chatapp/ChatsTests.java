@@ -33,14 +33,14 @@ public class ChatsTests {
 
     @Test
     public void testCreateChat() throws  Exception{
-        ChatModel stub1 = chatService.createChat(stubChatModel);
+        ChatModel stub1 = chatService.create(stubChatModel);
         assertEquals(stub1.getId(), stubChatModel.getId());
         assertEquals(stub1.getActive(), stubChatModel.getActive());
     }
 
     @Test
     public void testShouldGetAllChats() throws Exception{
-        List<ChatModel> stub = chatService.getAllChats();
+        List<ChatModel> stub = chatService.getAll();
 
         assertEquals(stubChatModel.getActive(), stub.get(0).getActive());
         assertEquals(1, stub.size());

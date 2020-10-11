@@ -1,15 +1,24 @@
 package com.fatec.chatapp.users;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
-public class UserModule {
+public class UserModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "user_id", updatable = false, nullable = false)
+    @ColumnDefault("random_uuid()")
+    @Type(type = "uuid-char")
+    private UUID id;
     private String nome;
     private String cpf;
     private String email;
@@ -20,10 +29,10 @@ public class UserModule {
     private String cepAddress;
     private Boolean isActive;
 
-    public UserModule() {
+    public UserModel() {
     }
 
-    public UserModule(String id, String nome, String cpf, String email, String password, String address, String cityAddress, String stateAddress, String cepAddress, Boolean isActive) {
+    public UserModel(UUID id, String nome, String cpf, String email, String password, String address, String cityAddress, String stateAddress, String cepAddress, Boolean isActive) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -44,11 +53,11 @@ public class UserModule {
         isActive = active;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

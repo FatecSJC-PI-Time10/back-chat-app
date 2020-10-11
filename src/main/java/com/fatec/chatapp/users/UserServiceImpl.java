@@ -10,12 +10,12 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public UserModule createUser(UserModule user) {
+    public UserModel create(UserModel user) {
         return userRepository.save(user);
     }
 
     @Override
-    public UserModule getUserById() {
+    public UserModel findOneById() {
         return userRepository.getOne(0L);
     }
 }

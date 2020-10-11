@@ -1,21 +1,30 @@
 package com.fatec.chatapp.chats;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class ChatModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "chat_id", updatable = false, nullable = false)
+    @ColumnDefault("random_uuid()")
+    @Type(type = "uuid-char")
+    private UUID id;
     private String nome;
     private Boolean isActive;
 
     public ChatModel() { }
 
-    public ChatModel(String id, String nome, Boolean isActive) {
+    public ChatModel(UUID id, String nome, Boolean isActive) {
         this.id = id;
         this.nome = nome;
         this.isActive = isActive;
@@ -29,11 +38,11 @@ public class ChatModel {
         isActive = active;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

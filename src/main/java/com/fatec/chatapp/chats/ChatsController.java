@@ -17,12 +17,12 @@ public class ChatsController {
 
     @PostMapping("/chats")
     public ChatModel createChat(@RequestBody ChatModel body){
-        return chatService.createChat(body);
+        return chatService.create(body);
     }
 
     @GetMapping("/chats")
     public List<ChatModel> getAllChats(){
-        return chatService.getAllChats();
+        return chatService.getAll();
     }
 
 
