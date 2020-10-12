@@ -1,7 +1,6 @@
 package com.fatec.chatapp.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.ColumnDefault;
