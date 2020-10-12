@@ -1,13 +1,18 @@
 package com.fatec.chatapp.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fatec.chatapp.messages.MessageModel;
+import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "users")
 public class UserModel {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -19,38 +24,43 @@ public class UserModel {
     @ColumnDefault("random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
-    private String nome;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "cpf")
     private String cpf;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
-    private String address;
-    private String cityAddress;
-    private String stateAddress;
-    private String cepAddress;
-    private Boolean isActive;
+
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<ParticipantModel> participants;
+
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<MessageModel> messages;
 
     public UserModel() {
     }
 
-    public UserModel(UUID id, String nome, String cpf, String email, String password, String address, String cityAddress, String stateAddress, String cepAddress, Boolean isActive) {
-        this.id = id;
-        this.nome = nome;
+    public UserModel(String name, String cpf, String email, String password) {
+        this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.password = password;
-        this.address = address;
-        this.cityAddress = cityAddress;
-        this.stateAddress = stateAddress;
-        this.cepAddress = cepAddress;
-        this.isActive = isActive;
     }
 
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
+    public UserModel(UUID id, String name, String cpf, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
     }
 
     public UUID getId() {
@@ -61,12 +71,12 @@ public class UserModel {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCpf() {
@@ -93,35 +103,19 @@ public class UserModel {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public Set<ParticipantModel> getParticipants() {
+        return participants;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setParticipants(Set<ParticipantModel> participants) {
+        this.participants = participants;
     }
 
-    public String getCityAddress() {
-        return cityAddress;
+    public Set<MessageModel> getMessages() {
+        return messages;
     }
 
-    public void setCityAddress(String cityAddress) {
-        this.cityAddress = cityAddress;
-    }
-
-    public String getStateAddress() {
-        return stateAddress;
-    }
-
-    public void setStateAddress(String stateAddress) {
-        this.stateAddress = stateAddress;
-    }
-
-    public String getCepAddress() {
-        return cepAddress;
-    }
-
-    public void setCepAddress(String cepAddress) {
-        this.cepAddress = cepAddress;
+    public void setMessages(Set<MessageModel> messages) {
+        this.messages = messages;
     }
 }

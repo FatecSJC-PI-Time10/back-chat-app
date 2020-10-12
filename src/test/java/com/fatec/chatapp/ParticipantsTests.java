@@ -1,45 +1,87 @@
 package com.fatec.chatapp;
 
+import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.chats.ChatsServiceImpl;
 import com.fatec.chatapp.participants.ParticipantModel;
+import com.fatec.chatapp.participants.ParticipantsController;
+import com.fatec.chatapp.participants.ParticipantsRepository;
 import com.fatec.chatapp.participants.ParticipantsServiceImpl;
+import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.users.UsersServiceImpl;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.BDDMockito.given;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class ParticipantsTests {
-	@Autowired
-	@InjectMocks
-	ParticipantsServiceImpl participantsService;
+class ParticipantServiceTests {
+  @MockBean
+  private ParticipantsRepository participantsRepository;
 
-	final ParticipantModel participantStub = new ParticipantModel();
+  @Autowired
+  ParticipantsServiceImpl participantsService;
 
-	@Test
-	void contextLoads() throws Exception {
-		assertThat(participantsService).isNotNull();
-	}
+  final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "ChatOne", true);
+  final UserModel userOne = new UserModel(UUID.randomUUID(), "UserOne", "123123", "adawd@adwda.com", "1234567");
+  final ParticipantModel participantOne = new ParticipantModel(chatOne, userOne);
 
-	@Test
-	public void shouldCreateOne() {
-		final ParticipantModel stub = participantsService.create(participantStub);
+  @Test
+  void contextLoads() throws Exception {
+    assertNotNull(participantsService);
+    assertNotNull(participantsRepository);
+  }
 
-		assertEquals(participantStub.getId(), stub.getId());
-	}
+  @Test
+  public void shouldCreateOne() {
+    given(participantsRepository.save(participantOne)).willReturn(participantOne);
+    ParticipantModel stub = participantsService.create(participantOne);
 
-	@Test
-	public void shouldFindOneById() {
-		final List<ParticipantModel> participants = participantsService.getAll();
-		final ParticipantModel participant = participants.get(0);
-		final ParticipantModel stub = participantsService.findOneById(participant.getId());
+    assertEquals(participantOne.getId(), stub.getId());
+    assertEquals(participantOne.getUser(), stub.getUser());
+    assertEquals(participantOne.getChat(), stub.getChat());
+  }
 
-		assertEquals(participant.getId(), stub.getId());
-	}
+  @Test
+  public void shouldFindOneById() {
+    given(participantsRepository.findOneById(participantOne.getId())).willReturn(participantOne);
+    ParticipantModel stub = participantsService.findOneById(participantOne.getId());
 
+    assertEquals(participantOne.getId(), stub.getId());
+    assertEquals(participantOne.getUser().getCpf(), stub.getUser().getCpf());
+    assertEquals(participantOne.getChat().getIsActive(), stub.getChat().getIsActive());
+  }
+}
 
+@WebMvcTest(ParticipantsController.class)
+class ParticipantsControllerTests {
+  @Autowired
+  MockMvc mockMvc;
+
+  @MockBean
+  ParticipantsServiceImpl participantsService;
+
+  @MockBean
+  ChatsServiceImpl chatsService;
+
+  @MockBean
+  UsersServiceImpl usersService;
+
+  @Test
+  void contextLoads() throws Exception {
+    assertNotNull(mockMvc);
+    assertNotNull(participantsService);
+    assertNotNull(chatsService);
+    assertNotNull(usersService);
+  }
 }

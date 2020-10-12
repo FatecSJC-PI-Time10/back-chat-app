@@ -1,5 +1,10 @@
 package com.fatec.chatapp.participants;
 
+import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.chats.ChatsServiceImpl;
+import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.users.UsersServiceImpl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,22 +12,35 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Api(value = "Participantes")
+@RequestMapping(value = "/participants")
 public class ParticipantsController {
     @Autowired
     ParticipantsServiceImpl participantsService;
 
-    @GetMapping("/participants")
+    @Autowired
+    ChatsServiceImpl chatsService;
+
+    @Autowired
+    UsersServiceImpl usersService;
+
+    @GetMapping
     public List<ParticipantModel> getAllParticipants() {
         return participantsService.getAll();
     }
 
-    @GetMapping("/participants/{id}")
+    @GetMapping("/{id}")
     public ParticipantModel findOneParticipantById(@PathVariable UUID id) {
         return participantsService.findOneById(id);
     }
 
-    @PostMapping("/participants")
-    public ParticipantModel createParticipant(@RequestBody ParticipantModel participant){
-        return participantsService.create(participant);
+    @PostMapping
+    public ParticipantModel createParticipant(@RequestBody ParticipantDTO request) {
+        final ChatModel chat = chatsService.findOneById(request.getChatId());
+        final UserModel user = usersService.findOneById(request.getUserId());
+        final ParticipantModel model = new ParticipantModel(chat, user);
+
+        return participantsService.create(model);
     }
 }
+

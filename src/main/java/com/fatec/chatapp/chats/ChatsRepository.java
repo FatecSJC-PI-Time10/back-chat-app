@@ -7,5 +7,5 @@ import java.util.UUID;
 
 @Repository
 public interface ChatsRepository extends JpaRepository<ChatModel, Long> {
-
+    ChatModel findOneById(UUID id);
 }

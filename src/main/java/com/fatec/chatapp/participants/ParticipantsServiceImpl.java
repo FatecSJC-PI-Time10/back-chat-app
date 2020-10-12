@@ -1,5 +1,7 @@
 package com.fatec.chatapp.participants;
 
+import com.fatec.chatapp.chats.ChatsRepository;
+import com.fatec.chatapp.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,12 @@ import java.util.UUID;
 public class ParticipantsServiceImpl implements ParticipantsService {
     @Autowired
     ParticipantsRepository participantsRepository;
+
+    @Autowired
+    UsersRepository usersRepository;
+
+    @Autowired
+    ChatsRepository chatsRepository;
 
     @Override
     public ParticipantModel create(ParticipantModel p) {

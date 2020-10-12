@@ -1,65 +1,116 @@
 package com.fatec.chatapp.chats;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fatec.chatapp.messages.MessageModel;
+import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "chat")
 public class ChatModel {
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "chat_id", updatable = false, nullable = false)
-    @ColumnDefault("random_uuid()")
-    @Type(type = "uuid-char")
-    private UUID id;
-    private String nome;
-    private Boolean isActive;
+  @Id
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(
+          name = "UUID",
+          strategy = "org.hibernate.id.UUIDGenerator"
+  )
+  @Column(name = "chat_id", updatable = false, nullable = false)
+  @ColumnDefault("random_uuid()")
+  @Type(type = "uuid-char")
+  private UUID id;
 
-    public ChatModel() { }
+  @Column(name = "name")
+  private String name;
 
-    public ChatModel(UUID id, String nome, Boolean isActive) {
-        this.id = id;
-        this.nome = nome;
-        this.isActive = isActive;
+  @Column(name = "is_active")
+  private Boolean isActive;
+
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
+  private Set<ParticipantModel> participants;
+
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
+  private Set<MessageModel> messages;
+
+  private final ObjectMapper objectMapper = new ObjectMapper();
+
+  public ChatModel() {
+  }
+
+  public ChatModel(String name, Boolean isActive) {
+    this.name = name;
+    this.isActive = isActive;
+  }
+
+  public ChatModel(UUID id, String name, Boolean isActive) {
+    this.id = id;
+    this.name = name;
+    this.isActive = isActive;
+  }
+
+  public Boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
+  }
+
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Set<ParticipantModel> getParticipants() {
+    return participants;
+  }
+
+  public void setParticipants(Set<ParticipantModel> participants) {
+    this.participants = participants;
+  }
+
+  public Set<MessageModel> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(Set<MessageModel> messages) {
+    this.messages = messages;
+  }
+
+  @Override
+  public String toString() {
+    return "ChatModel{" +
+            "id='" + id + '\'' +
+            ", nome='" + name + '\'' +
+            ", isActive=" + isActive +
+            '}';
+  }
+
+  public String toJson() {
+    try {
+      return objectMapper.writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+      return null;
     }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    @Override
-    public String toString() {
-        return "ChatModel{" +
-                "id='" + id + '\'' +
-                ", nome='" + nome + '\'' +
-                ", isActive=" + isActive +
-                '}';
-    }
+  }
 }
