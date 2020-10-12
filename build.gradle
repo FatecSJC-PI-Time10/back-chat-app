@@ -18,9 +18,9 @@ sonarqube {
         property "sonar.projectKey", "FatecSJC-PI-Time10_back-chat-app"
         property "sonar.organization", "fatecsjc-pi-time10"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.coverage.jacoco.xmlReportPaths", "app/build/test-results/test/TEST-com.fatec.chatapp.MessagesTests.xml"
-        property "sonar.coverage.jacoco.xmlReportPaths", "app/build/test-results/test/TEST-com.fatec.chatapp.ChatsTests.xml"
-        property "sonar.coverage.jacoco.xmlReportPaths", "app/build/test-results/test/TEST-com.fatec.chatapp.ParticipantsTests.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/test-results/test/TEST-com.fatec.chatapp.MessagesTests.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/test-results/test/TEST-com.fatec.chatapp.ChatsTests.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/test-results/test/TEST-com.fatec.chatapp.ParticipantsTests.xml"
     }
 }
 
