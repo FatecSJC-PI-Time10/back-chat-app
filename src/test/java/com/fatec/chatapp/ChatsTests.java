@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
@@ -35,20 +34,21 @@ class ChatsServiceTests {
   private ChatsRepository chatsRepository;
 
   @Autowired
-  private ChatsServiceImpl chatService;
+  private ChatsServiceImpl chatsService;
 
   final List<ChatModel> chats = new ArrayList<>();
   final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "String", true);
 
   @Test
-  public void contextLoads() throws Exception {
-    assertThat(chatService).isNotNull();
+  void contextLoads() throws Exception {
+    assertNotNull(chatsRepository);
+    assertNotNull(chatsService);
   }
 
   @Test
-  public void shouldCreateChat() throws Exception {
+  void shouldCreateChat() throws Exception {
     given(chatsRepository.save(chatOne)).willReturn(chatOne);
-    ChatModel stub = chatService.create(chatOne);
+    ChatModel stub = chatsService.create(chatOne);
 
     assertEquals(chatOne.getId(), stub.getId());
     assertEquals(chatOne.getIsActive(), stub.getIsActive());
@@ -56,11 +56,11 @@ class ChatsServiceTests {
 
   @Ignore
   @Test
-  public void shouldGetAllChats() throws Exception {
+  void shouldGetAllChats() throws Exception {
     chats.add(chatOne);
     given(chatsRepository.findAll()).willReturn(chats);
 
-    List<ChatModel> stub = chatService.getAll();
+    List<ChatModel> stub = chatsService.getAll();
 
     assertEquals(1, stub.size());
   }
@@ -78,13 +78,19 @@ class ChatsControllerTests {
   final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "Chat One", true);
 
   @Test
-  public void shouldFetchAll() throws Exception {
+  void contextLoads() throws Exception {
+    assertNotNull(mockMvc);
+    assertNotNull(chatsService);
+  }
+
+  @Test
+  void shouldFetchAll() throws Exception {
     when(chatsService.getAll()).thenReturn(chats);
     this.mockMvc.perform(get("/chats")).andDo(print()).andExpect(status().isOk());
   }
 
   @Test
-  public void shouldCreate() throws Exception {
+  void shouldCreate() throws Exception {
     final String json = chatOne.toJson();
     assertNotNull(json);
     when(chatsService.create(chatOne)).thenReturn(chatOne);

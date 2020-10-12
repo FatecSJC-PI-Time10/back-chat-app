@@ -22,12 +22,8 @@ public class MessagesServiceImpl implements MessagesService {
     ChatsRepository chatsRepository;
 
     @Override
-    public MessageModel create(MessageDTO m) {
-        final UserModel userModel = usersRepository.findOneById(m.getUserId());
-        final ChatModel chatModel = chatsRepository.findOneById(m.getChatId());
-        final MessageModel model = new MessageModel(m.getBody(), userModel, chatModel);
-
-        return messagesRepository.save(model);
+    public MessageModel create(MessageModel m) {
+        return messagesRepository.save(m);
     }
 
     @Override

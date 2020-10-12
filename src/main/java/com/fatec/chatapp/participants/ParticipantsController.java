@@ -1,6 +1,8 @@
 package com.fatec.chatapp.participants;
 
-import com.fatec.chatapp.chats.ChatsService;
+import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.chats.ChatsServiceImpl;
+import com.fatec.chatapp.users.UserModel;
 import com.fatec.chatapp.users.UsersServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,12 @@ public class ParticipantsController {
     @Autowired
     ParticipantsServiceImpl participantsService;
 
+    @Autowired
+    ChatsServiceImpl chatsService;
+
+    @Autowired
+    UsersServiceImpl usersService;
+
     @GetMapping
     public List<ParticipantModel> getAllParticipants() {
         return participantsService.getAll();
@@ -27,8 +35,12 @@ public class ParticipantsController {
     }
 
     @PostMapping
-    public ParticipantModel createParticipant(@RequestBody ParticipantDTO body) {
-        return participantsService.create(body);
+    public ParticipantModel createParticipant(@RequestBody ParticipantDTO request) {
+        final ChatModel chat = chatsService.findOneById(request.getChatId());
+        final UserModel user = usersService.findOneById(request.getUserId());
+        final ParticipantModel model = new ParticipantModel(chat, user);
+
+        return participantsService.create(model);
     }
 }
 
