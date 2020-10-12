@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id "org.sonarqube" version "3.0"
+    id 'jacoco'
 }
 
 group = 'com.fatec'
@@ -25,6 +26,13 @@ sonarqube {
         ]
     }
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+test.finalizedBy jacocoTestReport
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
