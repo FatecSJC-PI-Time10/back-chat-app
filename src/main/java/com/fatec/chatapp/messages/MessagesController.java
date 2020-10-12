@@ -12,7 +12,7 @@ public class MessagesController {
     MessagesServiceImpl messagesService;
 
     @PostMapping("/messages")
-    public MessageModel createMessage(@RequestBody MessageModel body) {
+    public MessageModel createMessage(@RequestBody MessageDTO body) {
         return messagesService.create(body);
     }
 
@@ -26,3 +26,4 @@ public class MessagesController {
         return messagesService.findOneById(id);
     }
 }
+

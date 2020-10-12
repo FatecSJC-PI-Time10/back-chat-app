@@ -1,5 +1,9 @@
 package com.fatec.chatapp.participants;
 
+import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.chats.ChatsRepository;
+import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +15,20 @@ public class ParticipantsServiceImpl implements ParticipantsService {
     @Autowired
     ParticipantsRepository participantsRepository;
 
+    @Autowired
+    UsersRepository usersRepository;
+
+    @Autowired
+    ChatsRepository chatsRepository;
+
     @Override
-    public ParticipantModel create(ParticipantModel p) {
-        return participantsRepository.save(p);
+    public ParticipantModel create(ParticipantDTO p) {
+        final ChatModel chat = chatsRepository.findOneById(p.getChatId());
+        final UserModel user = usersRepository.findOneById(p.getUserId());
+
+        final ParticipantModel model = new ParticipantModel(chat, user);
+
+        return participantsRepository.save(model);
     }
 
     @Override

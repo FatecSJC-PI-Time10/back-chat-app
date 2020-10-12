@@ -1,5 +1,7 @@
 package com.fatec.chatapp.participants;
 
+import com.fatec.chatapp.chats.ChatsService;
+import com.fatec.chatapp.users.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +24,8 @@ public class ParticipantsController {
     }
 
     @PostMapping("/participants")
-    public ParticipantModel createParticipant(@RequestBody ParticipantModel participant){
-        return participantsService.create(participant);
+    public ParticipantModel createParticipant(@RequestBody ParticipantDTO body) {
+        return participantsService.create(body);
     }
 }
+

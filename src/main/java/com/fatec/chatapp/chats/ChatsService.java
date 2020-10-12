@@ -1,9 +1,10 @@
 package com.fatec.chatapp.chats;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ChatsService {
-    public ChatModel create(ChatModel body);
-    public List<ChatModel> getAll();
-    public ChatModel findOneById();
+     ChatModel create(ChatModel body);
+     List<ChatModel> getAll();
+     ChatModel findOneById(UUID id);
 }

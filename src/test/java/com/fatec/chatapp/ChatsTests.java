@@ -20,29 +20,25 @@ public class ChatsTests {
     @InjectMocks
     ChatsServiceImpl chatService;
 
-    @Autowired
-    private ChatsController controller;
-
     private ChatModel stubChatModel = new ChatModel(null, "String",true);
 
     @Test
     public void contextLoads() throws Exception {
-        assertThat(controller).isNotNull();
         assertThat(chatService).isNotNull();
     }
 
     @Test
-    public void testCreateChat() throws  Exception{
+    public void shouldCreateChat() throws  Exception{
         ChatModel stub1 = chatService.create(stubChatModel);
         assertEquals(stub1.getId(), stubChatModel.getId());
-        assertEquals(stub1.getActive(), stubChatModel.getActive());
+        assertEquals(stub1.getIsActive(), stubChatModel.getIsActive());
     }
 
     @Test
-    public void testShouldGetAllChats() throws Exception{
+    public void shouldGetAllChats() throws Exception{
         List<ChatModel> stub = chatService.getAll();
 
-        assertEquals(stubChatModel.getActive(), stub.get(0).getActive());
+        assertEquals(stubChatModel.getIsActive(), stub.get(0).getIsActive());
         assertEquals(1, stub.size());
     }
 }
