@@ -2,6 +2,7 @@ package com.fatec.chatapp;
 
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.participants.ParticipantModel;
+import com.fatec.chatapp.participants.ParticipantsController;
 import com.fatec.chatapp.participants.ParticipantsRepository;
 import com.fatec.chatapp.participants.ParticipantsServiceImpl;
 import com.fatec.chatapp.users.UserModel;
@@ -60,7 +61,7 @@ class ParticipantServiceTests {
   }
 }
 
-@WebMvcTest
+@WebMvcTest(ParticipantsController.class)
 class ParticipantsControllerTests {
   @Autowired
   MockMvc mockMvc;

@@ -3,6 +3,7 @@ package com.fatec.chatapp;
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.chats.ChatsController;
 import com.fatec.chatapp.messages.MessageModel;
+import com.fatec.chatapp.messages.MessagesController;
 import com.fatec.chatapp.messages.MessagesRepository;
 import com.fatec.chatapp.messages.MessagesServiceImpl;
 import com.fatec.chatapp.users.UserModel;
@@ -72,7 +73,7 @@ class MessagesServiceTests {
   }
 }
 
-@WebMvcTest(ChatsController.class)
+@WebMvcTest(MessagesController.class)
 class MessagesControllerTests {
   @Autowired
   MockMvc mockMvc;
