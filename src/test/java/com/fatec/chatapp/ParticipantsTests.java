@@ -63,10 +63,10 @@ class ParticipantServiceTests {
 @WebMvcTest
 class ParticipantsControllerTests {
   @Autowired
-  private MockMvc mockMvc;
+  MockMvc mockMvc;
 
   @MockBean
-  private ParticipantsServiceImpl participantsService;
+  ParticipantsServiceImpl participantsService;
 
   @Test
   void contextLoads() throws Exception {

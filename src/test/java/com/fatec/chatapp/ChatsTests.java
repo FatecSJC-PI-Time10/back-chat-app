@@ -31,10 +31,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class ChatsServiceTests {
   @MockBean
-  private ChatsRepository chatsRepository;
+  ChatsRepository chatsRepository;
 
   @Autowired
-  private ChatsServiceImpl chatsService;
+  ChatsServiceImpl chatsService;
 
   final List<ChatModel> chats = new ArrayList<>();
   final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "String", true);
@@ -69,10 +69,10 @@ class ChatsServiceTests {
 @WebMvcTest(ChatsController.class)
 class ChatsControllerTests {
   @Autowired
-  private MockMvc mockMvc;
+  MockMvc mockMvc;
 
   @MockBean
-  private ChatsServiceImpl chatsService;
+  ChatsServiceImpl chatsService;
 
   final List<ChatModel> chats = new ArrayList<>();
   final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "Chat One", true);

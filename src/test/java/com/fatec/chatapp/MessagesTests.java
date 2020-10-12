@@ -26,7 +26,7 @@ import static org.mockito.BDDMockito.given;
 @SpringBootTest
 class MessagesServiceTests {
   @MockBean
-  private MessagesRepository messagesRepository;
+  MessagesRepository messagesRepository;
 
   @Autowired
   MessagesServiceImpl messagesService;
@@ -75,10 +75,10 @@ class MessagesServiceTests {
 @WebMvcTest(ChatsController.class)
 class MessagesControllerTests {
   @Autowired
-  private MockMvc mockMvc;
+  MockMvc mockMvc;
 
   @MockBean
-  private MessagesServiceImpl messagesService;
+  MessagesServiceImpl messagesService;
 
   @Test
   void contextLoads() throws Exception {
