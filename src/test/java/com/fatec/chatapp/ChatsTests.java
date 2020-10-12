@@ -54,7 +54,6 @@ class ChatsServiceTests {
     assertEquals(chatOne.getIsActive(), stub.getIsActive());
   }
 
-  @Ignore
   @Test
   void shouldGetAllChats() throws Exception {
     chats.add(chatOne);

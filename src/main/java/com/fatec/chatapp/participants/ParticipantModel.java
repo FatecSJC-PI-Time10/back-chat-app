@@ -1,6 +1,5 @@
 package com.fatec.chatapp.participants;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.users.UserModel;
 import org.hibernate.annotations.ColumnDefault;
