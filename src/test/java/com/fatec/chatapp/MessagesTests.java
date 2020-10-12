@@ -30,6 +30,7 @@ class MessagesServiceTests {
 
   @Autowired
   MessagesServiceImpl messagesService;
+
   final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "ChatOne", true);
   final UserModel userOne = new UserModel(UUID.randomUUID(), "UserOne", "123123", "adawd@adwda.com", "1234567");
   final MessageModel messageOne = new MessageModel("Hello Chat", userOne, chatOne);
@@ -84,6 +85,4 @@ class MessagesControllerTests {
     assertNotNull(mockMvc);
     assertNotNull(messagesService);
   }
-
-
 }
