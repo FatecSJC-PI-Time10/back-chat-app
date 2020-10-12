@@ -2,11 +2,13 @@ package com.fatec.chatapp;
 
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.chats.ChatsController;
+import com.fatec.chatapp.chats.ChatsServiceImpl;
 import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.messages.MessagesController;
 import com.fatec.chatapp.messages.MessagesRepository;
 import com.fatec.chatapp.messages.MessagesServiceImpl;
 import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.users.UsersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,9 +83,17 @@ class MessagesControllerTests {
   @MockBean
   MessagesServiceImpl messagesService;
 
+  @MockBean
+  ChatsServiceImpl chatsService;
+
+  @MockBean
+  UsersServiceImpl usersService;
+
   @Test
   void contextLoads() throws Exception {
     assertNotNull(mockMvc);
     assertNotNull(messagesService);
+    assertNotNull(chatsService);
+    assertNotNull(usersService);
   }
 }
