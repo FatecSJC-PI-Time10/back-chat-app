@@ -37,6 +37,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+    compile group: 'com.fasterxml', name: 'jackson-module-json-org', version: '0.9.1'
     runtimeOnly 'com.h2database:h2'
     testCompile 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.22'
