@@ -1,5 +1,6 @@
 package com.fatec.chatapp;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.chats.ChatsController;
 import com.fatec.chatapp.chats.ChatsRepository;
@@ -75,6 +76,7 @@ class ChatsControllerTests {
 
   final List<ChatModel> chats = new ArrayList<>();
   final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "Chat One", true);
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
   @Test
   void contextLoads() throws Exception {
@@ -90,7 +92,8 @@ class ChatsControllerTests {
 
   @Test
   void shouldCreate() throws Exception {
-    final String json = chatOne.toJson();
+    final String json = objectMapper.writeValueAsString(chatOne);
+
     assertNotNull(json);
     when(chatsService.create(chatOne)).thenReturn(chatOne);
     this.mockMvc.perform(post("/chats")

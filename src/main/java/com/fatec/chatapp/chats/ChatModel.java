@@ -41,8 +41,6 @@ public class ChatModel {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
   private Set<MessageModel> messages;
 
-  private final ObjectMapper objectMapper = new ObjectMapper();
-
   public ChatModel() {
   }
 
@@ -104,13 +102,5 @@ public class ChatModel {
             ", nome='" + name + '\'' +
             ", isActive=" + isActive +
             '}';
-  }
-
-  public String toJson() {
-    try {
-      return objectMapper.writeValueAsString(this);
-    } catch (JsonProcessingException e) {
-      return null;
-    }
   }
 }
