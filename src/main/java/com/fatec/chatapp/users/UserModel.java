@@ -1,6 +1,5 @@
 package com.fatec.chatapp.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.ColumnDefault;
@@ -37,11 +36,9 @@ public class UserModel {
     @Column(name = "password")
     private String password;
 
-    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Set<ParticipantModel> participants;
 
-    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Set<MessageModel> messages;
 
