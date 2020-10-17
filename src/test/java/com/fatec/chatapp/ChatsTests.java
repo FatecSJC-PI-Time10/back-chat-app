@@ -1,48 +1,106 @@
 package com.fatec.chatapp;
 
-import com.fatec.chatapp.chats.ChatsController;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.chats.ChatsController;
+import com.fatec.chatapp.chats.ChatsRepository;
 import com.fatec.chatapp.chats.ChatsServiceImpl;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-public class ChatsTests {
-    @Autowired
-    @InjectMocks
-    ChatsServiceImpl chatService;
+class ChatsServiceTests {
+  @MockBean
+  ChatsRepository chatsRepository;
 
-    @Autowired
-    private ChatsController controller;
+  @Autowired
+  ChatsServiceImpl chatsService;
 
-    private ChatModel stubChatModel = new ChatModel(null, "String",true);
+  final List<ChatModel> chats = new ArrayList<>();
+  final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "String", true);
 
-    @Test
-    public void contextLoads() throws Exception {
-        assertThat(controller).isNotNull();
-        assertThat(chatService).isNotNull();
-    }
+  @Test
+  void contextLoads() throws Exception {
+    assertNotNull(chatsRepository);
+    assertNotNull(chatsService);
+  }
 
-    @Test
-    public void testCreateChat() throws  Exception{
-        ChatModel stub1 = chatService.createChat(stubChatModel);
-        assertEquals(stub1.getId(), stubChatModel.getId());
-        assertEquals(stub1.getActive(), stubChatModel.getActive());
-    }
+  @Test
+  void shouldCreateChat() throws Exception {
+    given(chatsRepository.save(chatOne)).willReturn(chatOne);
+    ChatModel stub = chatsService.create(chatOne);
 
-    @Test
-    public void testShouldGetAllChats() throws Exception{
-        List<ChatModel> stub = chatService.getAllChats();
+    assertEquals(chatOne.getId(), stub.getId());
+    assertEquals(chatOne.getIsActive(), stub.getIsActive());
+  }
 
-        assertEquals(stubChatModel.getActive(), stub.get(0).getActive());
-        assertEquals(1, stub.size());
-    }
+  @Test
+  void shouldGetAllChats() throws Exception {
+    chats.add(chatOne);
+    given(chatsRepository.findAll()).willReturn(chats);
+
+    List<ChatModel> stub = chatsService.getAll();
+
+    assertEquals(1, stub.size());
+  }
 }
+
+@WebMvcTest(ChatsController.class)
+class ChatsControllerTests {
+  @Autowired
+  MockMvc mockMvc;
+
+  @MockBean
+  ChatsServiceImpl chatsService;
+
+  final List<ChatModel> chats = new ArrayList<>();
+  final ChatModel chatOne = new ChatModel(UUID.randomUUID(), "Chat One", true);
+  private final ObjectMapper objectMapper = new ObjectMapper();
+
+  @Test
+  void contextLoads() throws Exception {
+    assertNotNull(mockMvc);
+    assertNotNull(chatsService);
+  }
+
+  @Test
+  void shouldFetchAll() throws Exception {
+    when(chatsService.getAll()).thenReturn(chats);
+    this.mockMvc.perform(get("/chats")).andDo(print()).andExpect(status().isOk());
+  }
+
+  @Test
+  void shouldCreate() throws Exception {
+    final String json = objectMapper.writeValueAsString(chatOne);
+
+    assertNotNull(json);
+    when(chatsService.create(chatOne)).thenReturn(chatOne);
+    this.mockMvc.perform(post("/chats")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
+            .andDo(print())
+            .andExpect(status().isOk());
+  }
+}
+

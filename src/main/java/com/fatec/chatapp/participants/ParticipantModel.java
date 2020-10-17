@@ -1,4 +1,4 @@
-package com.fatec.chatapp.messages;
+package com.fatec.chatapp.participants;
 
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.users.UserModel;
@@ -10,46 +10,38 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "message")
-public class MessageModel {
-    @Id 
+@Table(name = "participant")
+public class ParticipantModel {
+    @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "message_id", updatable = false, nullable = false)
+    @Column(name = "participant_id", updatable = false, nullable = false)
     @ColumnDefault("random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
-
-    @Column(name = "body")
-    private String body;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserModel user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chat_id")
     private ChatModel chat;
 
-    public MessageModel() { }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserModel user;
 
-    public MessageModel(String body) {
-        this.body = body;
+    public ParticipantModel() {
+
     }
 
-    public MessageModel(UUID id, String body) {
+    public ParticipantModel(UUID id) {
         this.id = id;
-        this.body = body;
     }
 
-
-    public MessageModel(String body, UserModel user, ChatModel chat) {
-        this.body = body;
-        this.user = user;
+    public ParticipantModel(ChatModel chat, UserModel user) {
         this.chat = chat;
+        this.user = user;
     }
 
     public UUID getId() {
@@ -60,12 +52,12 @@ public class MessageModel {
         this.id = id;
     }
 
-    public String getBody() {
-        return body;
+    public ChatModel getChat() {
+        return chat;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setChat(ChatModel chat) {
+        this.chat = chat;
     }
 
     public UserModel getUser() {
@@ -76,19 +68,10 @@ public class MessageModel {
         this.user = user;
     }
 
-    public ChatModel getChat() {
-        return chat;
-    }
-
-    public void setChat(ChatModel chat) {
-        this.chat = chat;
-    }
-
     @Override
     public String toString() {
-        return "MessageModule{" +
-                "id='" + id + '\'' +
-                ", body='" + body + '\'' +
+        return "ParticipantModel{" +
+                "id=" + id +
                 '}';
     }
 }
