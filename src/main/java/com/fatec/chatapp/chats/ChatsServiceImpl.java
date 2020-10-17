@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service("chats")
 public class ChatsServiceImpl implements ChatsService {
@@ -12,18 +13,18 @@ public class ChatsServiceImpl implements ChatsService {
     private ChatsRepository chatsRepository;
 
     @Override
-    public ChatModel createChat(ChatModel body) {
+    public ChatModel create(ChatModel body) {
 
         return chatsRepository.save(body);
     }
 
     @Override
-    public List<ChatModel> getAllChats() {
+    public List<ChatModel> getAll() {
         return chatsRepository.findAll();
     }
 
     @Override
-    public ChatModel getChatById() {
-        return null;
+    public ChatModel findOneById(UUID id) {
+        return chatsRepository.findOneById(id);
     }
 }

@@ -1,56 +1,106 @@
 package com.fatec.chatapp.chats;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fatec.chatapp.messages.MessageModel;
+import com.fatec.chatapp.participants.ParticipantModel;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
+@Table(name = "chat")
 public class ChatModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String nome;
-    private Boolean isActive;
+  @Id
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(
+          name = "UUID",
+          strategy = "org.hibernate.id.UUIDGenerator"
+  )
+  @Column(name = "chat_id", updatable = false, nullable = false)
+  @ColumnDefault("random_uuid()")
+  @Type(type = "uuid-char")
+  private UUID id;
 
-    public ChatModel() { }
+  @Column(name = "name")
+  private String name;
 
-    public ChatModel(String id, String nome, Boolean isActive) {
-        this.id = id;
-        this.nome = nome;
-        this.isActive = isActive;
-    }
+  @Column(name = "is_active")
+  private Boolean isActive;
 
-    public Boolean getActive() {
-        return isActive;
-    }
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
+  private Set<ParticipantModel> participants;
 
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
+  private Set<MessageModel> messages;
 
-    public String getId() {
-        return id;
-    }
+  public ChatModel() {
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public ChatModel(String name, Boolean isActive) {
+    this.name = name;
+    this.isActive = isActive;
+  }
 
-    public String getNome() {
-        return nome;
-    }
+  public ChatModel(UUID id, String name, Boolean isActive) {
+    this.id = id;
+    this.name = name;
+    this.isActive = isActive;
+  }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public Boolean getIsActive() {
+    return isActive;
+  }
 
-    @Override
-    public String toString() {
-        return "ChatModel{" +
-                "id='" + id + '\'' +
-                ", nome='" + nome + '\'' +
-                ", isActive=" + isActive +
-                '}';
-    }
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
+  }
+
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Set<ParticipantModel> getParticipants() {
+    return participants;
+  }
+
+  public void setParticipants(Set<ParticipantModel> participants) {
+    this.participants = participants;
+  }
+
+  public Set<MessageModel> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(Set<MessageModel> messages) {
+    this.messages = messages;
+  }
+
+  @Override
+  public String toString() {
+    return "ChatModel{" +
+            "id='" + id + '\'' +
+            ", nome='" + name + '\'' +
+            ", isActive=" + isActive +
+            '}';
+  }
 }
