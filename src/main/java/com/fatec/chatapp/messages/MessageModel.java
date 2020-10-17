@@ -1,5 +1,6 @@
 package com.fatec.chatapp.messages;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.users.UserModel;
 import org.hibernate.annotations.ColumnDefault;
@@ -26,10 +27,12 @@ public class MessageModel {
     @Column(name = "body")
     private String body;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserModel user;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chat_id")
     private ChatModel chat;

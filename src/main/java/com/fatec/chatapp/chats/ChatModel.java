@@ -1,8 +1,5 @@
 package com.fatec.chatapp.chats;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.ColumnDefault;
@@ -33,11 +30,9 @@ public class ChatModel {
   @Column(name = "is_active")
   private Boolean isActive;
 
-  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
   private Set<ParticipantModel> participants;
 
-  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
   private Set<MessageModel> messages;
 
