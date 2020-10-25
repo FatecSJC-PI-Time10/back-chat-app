@@ -77,11 +77,11 @@ class ParticipantsControllerTests {
   @MockBean
   UsersServiceImpl usersService;
 
-  @Test
-  void contextLoads() throws Exception {
-    assertNotNull(mockMvc);
-    assertNotNull(participantsService);
-    assertNotNull(chatsService);
-    assertNotNull(usersService);
-  }
+//  @Test
+//  void contextLoads() throws Exception {
+//    assertNotNull(mockMvc);
+//    assertNotNull(participantsService);
+//    assertNotNull(chatsService);
+//    assertNotNull(usersService);
+//  }
 }

@@ -89,11 +89,11 @@ class MessagesControllerTests {
   @MockBean
   UsersServiceImpl usersService;
 
-  @Test
-  void contextLoads() throws Exception {
-    assertNotNull(mockMvc);
-    assertNotNull(messagesService);
-    assertNotNull(chatsService);
-    assertNotNull(usersService);
-  }
+//  @Test
+//  void contextLoads() throws Exception {
+//    assertNotNull(mockMvc);
+//    assertNotNull(messagesService);
+//    assertNotNull(chatsService);
+//    assertNotNull(usersService);
+//  }
 }
