@@ -33,10 +33,13 @@ test.finalizedBy jacocoTestReport
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.data:spring-data-rest-hal-explorer'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
     runtimeOnly 'com.h2database:h2'
     testCompile 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.22'
