@@ -11,7 +11,6 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     UsersRepository usersRepository;
 
-
     @Override
     public UserModel create(UserModel user) {
         return usersRepository.save(user);
