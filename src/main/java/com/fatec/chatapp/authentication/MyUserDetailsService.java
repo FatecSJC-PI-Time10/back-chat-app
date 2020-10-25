@@ -1,4 +1,4 @@
-package com.fatec.chatapp.userdetails;
+package com.fatec.chatapp.authentication;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
