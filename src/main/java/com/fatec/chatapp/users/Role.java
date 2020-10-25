@@ -1,0 +1,51 @@
+package com.fatec.chatapp.users;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.UUID;
+
+enum Roles {
+  ADMIN,
+  EDITOR,
+  USER;
+}
+
+@Entity
+@Table(name = "roles")
+public class Role {
+  @Id
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(
+          name = "UUID",
+          strategy = "org.hibernate.id.UUIDGenerator"
+  )
+  @Column(name = "user_id", updatable = false, nullable = false)
+  @ColumnDefault("random_uuid()")
+  @Type(type = "uuid-char")
+  private UUID id;
+
+  @Column(name = "name")
+  private String name;
+
+  public Role() {
+  }
+
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+}

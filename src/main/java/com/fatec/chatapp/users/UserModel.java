@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,19 +38,28 @@ public class UserModel {
     private String password;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<ParticipantModel> participants;
+    private Set<ParticipantModel> participants = new HashSet<>();
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<MessageModel> messages;
+    private Set<MessageModel> messages = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     public UserModel() {
     }
 
-    public UserModel(String name, String cpf, String email, String password) {
+    public UserModel(String name, String cpf, String email, String password, HashSet<Role> roles) {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public UserModel(UUID id, String name, String cpf, String email, String password) {
@@ -114,5 +124,13 @@ public class UserModel {
 
     public void setMessages(Set<MessageModel> messages) {
         this.messages = messages;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
