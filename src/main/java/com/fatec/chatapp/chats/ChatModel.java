@@ -20,7 +20,7 @@ public class ChatModel {
           strategy = "org.hibernate.id.UUIDGenerator"
   )
   @Column(name = "chat_id", updatable = false, nullable = false)
-  @ColumnDefault("random_uuid()")
+  @ColumnDefault("gen_random_uuid()")
   @Type(type = "uuid-char")
   private UUID id;
 
