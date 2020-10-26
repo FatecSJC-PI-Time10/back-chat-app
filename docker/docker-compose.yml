@@ -1,0 +1,33 @@
+version: '3'
+services:
+  chat-service:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    restart: on-failure
+    volumes:
+      - chat-service:/usr/src/app/
+    networks: 
+      - chat-network
+    depends_on:
+      - chat-db
+
+  chat-db:
+    build: postgres
+    environment:
+      - POSTGRES_USER=chat
+      - POSTGRES_PASSWORD=chat
+      - POSTGRES_DB=chat
+    volumes:
+      - chat-db:/var/lib/postgresql/data
+    networks:
+      - chat-network
+     
+networks:
+  chat-network:
+
+volumes:
+  chat-service:
+  chat-db:
