@@ -20,7 +20,7 @@ public class MessageModel {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "message_id", updatable = false, nullable = false)
-    @ColumnDefault("random_uuid()")
+    @ColumnDefault("gen_random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
 

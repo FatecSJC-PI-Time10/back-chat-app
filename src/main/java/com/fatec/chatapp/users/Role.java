@@ -22,8 +22,8 @@ public class Role {
           name = "UUID",
           strategy = "org.hibernate.id.UUIDGenerator"
   )
-  @Column(name = "user_id", updatable = false, nullable = false)
-  @ColumnDefault("random_uuid()")
+  @Column(name = "role_id", updatable = false, nullable = false)
+  @ColumnDefault("gen_random_uuid()")
   @Type(type = "uuid-char")
   private UUID id;
 
