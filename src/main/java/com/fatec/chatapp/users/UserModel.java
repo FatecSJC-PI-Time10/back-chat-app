@@ -21,7 +21,7 @@ public class UserModel {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "user_id", updatable = false, nullable = false)
-    @ColumnDefault("random_uuid()")
+    @ColumnDefault("gen_random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
 
