@@ -1,21 +1,16 @@
 package com.fatec.chatapp;
 
 import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.chats.ChatsServiceImpl;
 import com.fatec.chatapp.participants.ParticipantModel;
-import com.fatec.chatapp.participants.ParticipantsController;
 import com.fatec.chatapp.participants.ParticipantsRepository;
 import com.fatec.chatapp.participants.ParticipantsServiceImpl;
 import com.fatec.chatapp.users.UserModel;
-import com.fatec.chatapp.users.UsersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
@@ -61,27 +56,4 @@ class ParticipantServiceTests {
     assertEquals(participantOne.getUser().getCpf(), stub.getUser().getCpf());
     assertEquals(participantOne.getChat().getIsActive(), stub.getChat().getIsActive());
   }
-}
-
-@WebMvcTest(ParticipantsController.class)
-class ParticipantsControllerTests {
-  @Autowired
-  MockMvc mockMvc;
-
-  @MockBean
-  ParticipantsServiceImpl participantsService;
-
-  @MockBean
-  ChatsServiceImpl chatsService;
-
-  @MockBean
-  UsersServiceImpl usersService;
-
-//  @Test
-//  void contextLoads() throws Exception {
-//    assertNotNull(mockMvc);
-//    assertNotNull(participantsService);
-//    assertNotNull(chatsService);
-//    assertNotNull(usersService);
-//  }
 }
