@@ -1,6 +1,5 @@
 package com.fatec.chatapp.users;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -23,7 +22,6 @@ public class Role {
           strategy = "org.hibernate.id.UUIDGenerator"
   )
   @Column(name = "role_id", updatable = false, nullable = false)
-  @ColumnDefault("gen_random_uuid()")
   @Type(type = "uuid-char")
   private UUID id;
 
