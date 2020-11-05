@@ -1,5 +1,9 @@
 package com.fatec.chatapp.users;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fatec.chatapp.atividades.AtividadeModel;
+
 import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.GenericGenerator;
@@ -47,6 +51,13 @@ public class UserModel {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<AtividadeModel> atividades;
+
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<AtividadeModel> atividadeRequisitadas;
 
     public UserModel() {
     }
