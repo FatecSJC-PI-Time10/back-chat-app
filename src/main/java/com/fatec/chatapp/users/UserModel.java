@@ -6,7 +6,6 @@ import com.fatec.chatapp.atividades.AtividadeModel;
 
 import com.fatec.chatapp.messages.MessageModel;
 import com.fatec.chatapp.participants.ParticipantModel;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -24,8 +23,6 @@ public class UserModel {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "user_id", updatable = false, nullable = false)
-    @ColumnDefault("gen_random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
 
