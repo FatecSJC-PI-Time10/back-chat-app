@@ -8,7 +8,8 @@ public class AtividadeDTO {
     private String titulo;
     private String descricao;
 
-
+    public AtividadeDTO() {
+    }
 
     public AtividadeDTO(UUID userId, UUID requestId, String titulo, String descricao) {
         this.userId = userId;
