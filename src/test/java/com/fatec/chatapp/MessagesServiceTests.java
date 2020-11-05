@@ -1,22 +1,16 @@
 package com.fatec.chatapp;
 
 import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.chats.ChatsController;
-import com.fatec.chatapp.chats.ChatsServiceImpl;
 import com.fatec.chatapp.messages.MessageModel;
-import com.fatec.chatapp.messages.MessagesController;
 import com.fatec.chatapp.messages.MessagesRepository;
 import com.fatec.chatapp.messages.MessagesServiceImpl;
 import com.fatec.chatapp.users.UserModel;
-import com.fatec.chatapp.users.UsersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class MessagesServiceTests {
+public class MessagesServiceTests {
   @MockBean
   MessagesRepository messagesRepository;
 
@@ -73,27 +67,4 @@ class MessagesServiceTests {
     assertEquals(messageOne.getId(), stub.getId());
     assertEquals(messageOne.getUser().getName(), stub.getUser().getName());
   }
-}
-
-@WebMvcTest(MessagesController.class)
-class MessagesControllerTests {
-  @Autowired
-  MockMvc mockMvc;
-
-  @MockBean
-  MessagesServiceImpl messagesService;
-
-  @MockBean
-  ChatsServiceImpl chatsService;
-
-  @MockBean
-  UsersServiceImpl usersService;
-
-//  @Test
-//  void contextLoads() throws Exception {
-//    assertNotNull(mockMvc);
-//    assertNotNull(messagesService);
-//    assertNotNull(chatsService);
-//    assertNotNull(usersService);
-//  }
 }
