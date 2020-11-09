@@ -37,7 +37,7 @@ public class AtividadesController {
     public AtividadeModel salvaAtividadeModel(@RequestBody AtividadeDTO atividade) {
         UserModel usuario = userService.findOneById(atividade.getUserId());
         UserModel resquesteUser = userService.findOneById(atividade.getRequestId());
-        AtividadeModel model = new AtividadeModel(atividade.getTitulo(),atividade.getDescricao(), usuario, resquesteUser);
+        AtividadeModel model = new AtividadeModel(atividade.getTitulo(), atividade.getDescricao(), usuario, resquesteUser, true);
         return atividadesService.create(model);
     }
 

@@ -35,6 +35,9 @@ public class AtividadeModel {
     @Column(name = "descricao")
     private String descricao;
 
+    @Column(name = "isActive")
+    private Boolean isActive;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserModel user;
@@ -47,11 +50,12 @@ public class AtividadeModel {
     public AtividadeModel () {
     }
 
-    public AtividadeModel(String titulo, String descricao, UserModel user, UserModel requestUser) {
+    public AtividadeModel(String titulo, String descricao, UserModel user, UserModel requestUser, Boolean isActive) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.user = user;
         this.requestUser = requestUser;
+        this.isActive = isActive;
     }
 
     public UUID getId() {
@@ -92,5 +96,13 @@ public class AtividadeModel {
 
     public void setRequestUser(UserModel requestUser) {
         this.requestUser = requestUser;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
