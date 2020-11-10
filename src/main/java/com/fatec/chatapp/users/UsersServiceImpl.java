@@ -25,4 +25,9 @@ public class UsersServiceImpl implements UsersService {
     public List<UserModel> getAll() {
         return usersRepository.findAll();
     }
+
+    @Override
+    public UserModel findOneByEmail(String e) {
+        return usersRepository.findOneByEmail(e);
+    }
 }

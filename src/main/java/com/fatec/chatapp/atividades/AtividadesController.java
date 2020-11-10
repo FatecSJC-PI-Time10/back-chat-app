@@ -37,8 +37,7 @@ public class AtividadesController {
     @PostMapping
     public AtividadeModel salvaAtividadeModel(@Valid @RequestBody AtividadeDTO atividade) {
         UserModel usuario = userService.findOneById(atividade.getUserId());
-        UserModel resquesteUser = userService.findOneById(atividade.getRequestId());
-        AtividadeModel model = new AtividadeModel(atividade.getTitulo(), atividade.getDescricao(), usuario, resquesteUser, true);
+        AtividadeModel model = new AtividadeModel(atividade.getTitulo(), atividade.getDescricao(), usuario, true);
         return atividadesService.create(model);
     }
 

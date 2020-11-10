@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -38,23 +39,18 @@ public class AtividadeModel {
     @Column(name = "isActive")
     private Boolean isActive;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserModel user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "request_id")
-    private UserModel requestUser;
-
 
     public AtividadeModel () {
     }
 
-    public AtividadeModel(String titulo, String descricao, UserModel user, UserModel requestUser, Boolean isActive) {
+    public AtividadeModel(String titulo, String descricao, UserModel user, Boolean isActive) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.user = user;
-        this.requestUser = requestUser;
         this.isActive = isActive;
     }
 
@@ -88,14 +84,6 @@ public class AtividadeModel {
 
     public void setUser(UserModel user) {
         this.user = user;
-    }
-
-    public UserModel getRequestUser() {
-        return requestUser;
-    }
-
-    public void setRequestUser(UserModel requestUser) {
-        this.requestUser = requestUser;
     }
 
     public Boolean getActive() {

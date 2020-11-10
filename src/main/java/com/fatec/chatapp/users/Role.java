@@ -6,12 +6,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.UUID;
 
-enum Roles {
-  ADMIN,
-  EDITOR,
-  USER;
-}
-
 @Entity
 @Table(name = "roles")
 public class Role {

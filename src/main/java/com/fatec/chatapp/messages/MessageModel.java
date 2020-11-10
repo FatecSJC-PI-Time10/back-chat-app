@@ -26,13 +26,13 @@ public class MessageModel {
     private String body;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserModel user;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chat_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="chat_id")
     private ChatModel chat;
 
     public MessageModel() { }
