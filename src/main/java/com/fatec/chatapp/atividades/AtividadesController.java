@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public class AtividadesController {
 
     //Salvar atividade
     @PostMapping
-    public AtividadeModel salvaAtividadeModel(@RequestBody AtividadeDTO atividade) {
+    public AtividadeModel salvaAtividadeModel(@Valid @RequestBody AtividadeDTO atividade) {
         UserModel usuario = userService.findOneById(atividade.getUserId());
         UserModel resquesteUser = userService.findOneById(atividade.getRequestId());
         AtividadeModel model = new AtividadeModel(atividade.getTitulo(), atividade.getDescricao(), usuario, resquesteUser, true);

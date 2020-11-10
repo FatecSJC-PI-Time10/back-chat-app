@@ -37,6 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/authentication", "/explorer/**", "/h2-console/**").permitAll()
             .antMatchers(HttpMethod.POST, "/users").permitAll()
             .antMatchers(HttpMethod.GET, "/users/**").authenticated()
+            .antMatchers("/atividades/**").authenticated()
+            .antMatchers("/chats/**").authenticated()
+            .antMatchers("/messages/**").authenticated()
+            .antMatchers("/participants/**").authenticated()
             .and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(authenticationRequestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -44,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   @Bean
-  public AuthenticationManager authenticationManagerBean() throws  Exception {
+  public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
 

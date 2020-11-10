@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/authentication")
 public class AuthenticationController {
@@ -24,7 +26,7 @@ public class AuthenticationController {
   private JWTUtil jwtUtil = new JWTUtil("secret");
 
   @PostMapping
-  public ResponseEntity<?> createAuthentication(@RequestBody AuthenticationRequest body) throws Exception {
+  public ResponseEntity<?> createAuthentication(@Valid @RequestBody AuthenticationRequest body) throws Exception {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(body.getUsername(), body.getPassword()));
     } catch (BadCredentialsException exception) {

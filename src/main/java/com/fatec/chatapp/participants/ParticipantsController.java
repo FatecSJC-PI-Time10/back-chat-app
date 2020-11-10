@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public class ParticipantsController {
     }
 
     @GetMapping("/{id}")
-    public ParticipantModel findOneParticipantById(@PathVariable UUID id) {
+    public ParticipantModel findOneParticipantById(@Valid @PathVariable UUID id) {
         return participantsService.findOneById(id);
     }
 

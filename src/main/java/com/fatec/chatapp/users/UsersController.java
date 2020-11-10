@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,7 +15,7 @@ public class UsersController {
     UsersServiceImpl userService;
 
     @PostMapping
-    public UserModel create(@RequestBody UserModel user){
+    public UserModel create(@Valid @RequestBody UserModel user){
         return userService.create(user);
     }
 
