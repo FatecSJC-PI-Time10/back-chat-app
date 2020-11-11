@@ -28,7 +28,8 @@ public class AuthenticationController {
   @PostMapping
   public ResponseEntity<?> createAuthentication(@Valid @RequestBody AuthenticationRequest body) throws Exception {
     try {
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(body.getUsername(), body.getPassword()));
+      final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(body.getUsername(), body.getPassword());
+      authenticationManager.authenticate(usernamePasswordAuthenticationToken);
     } catch (BadCredentialsException exception) {
       throw new Exception("Incorrect username or password", exception);
     }

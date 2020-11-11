@@ -1,6 +1,7 @@
 package com.fatec.chatapp.users;
 
-import com.fatec.chatapp.atividades.AtividadeModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fatec.chatapp.atividades.ActivityModel;
 
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.messages.MessageModel;
@@ -56,7 +57,7 @@ public class UserModel {
     private Set<ChatModel> chats = new HashSet<>();
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<AtividadeModel> atividades = new HashSet<>();
+    private Set<ActivityModel> activities = new HashSet<>();
 
     public UserModel() {
     }
@@ -125,12 +126,12 @@ public class UserModel {
         this.chats = chats;
     }
 
-    public Set<AtividadeModel> getAtividades() {
-        return atividades;
+    public Set<ActivityModel> getActivities() {
+        return activities;
     }
 
-    public void setAtividades(Set<AtividadeModel> atividades) {
-        this.atividades = atividades;
+    public void setActivities(Set<ActivityModel> activities) {
+        this.activities = activities;
     }
 
     public Set<MessageModel> getMessages() {

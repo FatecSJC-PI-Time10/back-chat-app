@@ -13,22 +13,22 @@ public class AtividadesServiceImpl implements AtividadesService {
 
 
     @Override
-    public AtividadeModel create(AtividadeModel a) {
+    public ActivityModel create(ActivityModel a) {
         return atividadesRepository.save(a);
     }
 
     @Override
-    public void delete (AtividadeModel a) {
+    public void delete (ActivityModel a) {
         atividadesRepository.delete(a);
     }
 
     @Override
-    public List<AtividadeModel> getAll() {
+    public List<ActivityModel> getAll() {
         return atividadesRepository.findAll();
     }
 
     @Override
-    public AtividadeModel findOneById(UUID id) {
+    public ActivityModel findOneById(UUID id) {
         return atividadesRepository.findById(id);
     }
 }

@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@Api(value = "Atividades")
-@RequestMapping(value = "/atividades")
-public class AtividadesController {
+@Api(value = "Activities")
+@RequestMapping(value = "/activities")
+public class ActivitiesController {
 
     @Autowired
     AtividadesServiceImpl atividadesService;
@@ -23,33 +23,33 @@ public class AtividadesController {
 
     //Listar Atividades
     @GetMapping
-    public List<AtividadeModel> listarAtividades(){
+    public List<ActivityModel> listarAtividades(){
         return atividadesService.getAll();
     }
 
     //Encontrar atividade por ID
     @GetMapping("/{id}")
-    public AtividadeModel getAtividadeById(@PathVariable UUID id) {
+    public ActivityModel getAtividadeById(@PathVariable UUID id) {
         return atividadesService.findOneById(id);
     }
 
     //Salvar atividade
     @PostMapping
-    public AtividadeModel salvaAtividadeModel(@Valid @RequestBody AtividadeDTO atividade) {
-        UserModel usuario = userService.findOneById(atividade.getUserId());
-        AtividadeModel model = new AtividadeModel(atividade.getTitulo(), atividade.getDescricao(), usuario, true);
+    public ActivityModel salvaAtividadeModel(@Valid @RequestBody ActivityDTO activity) {
+        UserModel usuario = userService.findOneById(activity.getUserId());
+        ActivityModel model = new ActivityModel(activity.getTitle(), activity.getDescription(), usuario, activity.getIsActive());
         return atividadesService.create(model);
     }
 
     //Deletar atividade
     @DeleteMapping
-    public void deleteAtividade (@RequestBody AtividadeModel atividade) {
+    public void deleteAtividade (@RequestBody ActivityModel atividade) {
         atividadesService.delete(atividade);
     }
 
     //Atualizar atividade
     @PutMapping
-    public AtividadeModel atualizarAtividadeModel(@RequestBody AtividadeModel atividade) {
+    public ActivityModel atualizarAtividadeModel(@RequestBody ActivityModel atividade) {
         return atividadesService.create(atividade);
     }
 }

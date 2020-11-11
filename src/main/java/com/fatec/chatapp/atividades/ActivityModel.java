@@ -18,23 +18,23 @@ import org.hibernate.annotations.Type;
 import com.fatec.chatapp.users.UserModel;
 
 @Entity
-@Table(name = "atividade")
-public class AtividadeModel {
+@Table(name = "activity")
+public class ActivityModel {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "atividade_id", updatable = false, nullable = false)
+    @Column(name = "activity_id", updatable = false, nullable = false)
     @Type(type = "uuid-char")
     private UUID id;
 
-    @Column(name = "titulo")
-    private String titulo;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "descricao")
-    private String descricao;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "isActive")
     private Boolean isActive;
@@ -44,12 +44,12 @@ public class AtividadeModel {
     @JoinColumn(name = "user_id")
     private UserModel user;
 
-    public AtividadeModel () {
+    public ActivityModel() {
     }
 
-    public AtividadeModel(String titulo, String descricao, UserModel user, Boolean isActive) {
-        this.titulo = titulo;
-        this.descricao = descricao;
+    public ActivityModel(String title, String description, UserModel user, Boolean isActive) {
+        this.title = title;
+        this.description = description;
         this.user = user;
         this.isActive = isActive;
     }
@@ -62,20 +62,20 @@ public class AtividadeModel {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public UserModel getUser() {
@@ -86,11 +86,11 @@ public class AtividadeModel {
         this.user = user;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
     }
 }
