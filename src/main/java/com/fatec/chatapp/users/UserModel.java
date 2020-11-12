@@ -1,11 +1,9 @@
 package com.fatec.chatapp.users;
 
+import com.fatec.chatapp.activities.ActivityModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fatec.chatapp.atividades.AtividadeModel;
-
+import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.messages.MessageModel;
-import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -38,10 +36,7 @@ public class UserModel {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<ParticipantModel> participants = new HashSet<>();
-
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<MessageModel> messages = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -52,12 +47,16 @@ public class UserModel {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<AtividadeModel> atividades;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_chats",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "chat_id")
+    )
+    private Set<ChatModel> chats = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<AtividadeModel> atividadeRequisitadas;
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<ActivityModel> activities = new HashSet<>();
 
     public UserModel() {
     }
@@ -118,12 +117,20 @@ public class UserModel {
         this.password = password;
     }
 
-    public Set<ParticipantModel> getParticipants() {
-        return participants;
+    public Set<ChatModel> getChats() {
+        return chats;
     }
 
-    public void setParticipants(Set<ParticipantModel> participants) {
-        this.participants = participants;
+    public void setChats(Set<ChatModel> chats) {
+        this.chats = chats;
+    }
+
+    public Set<ActivityModel> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<ActivityModel> activities) {
+        this.activities = activities;
     }
 
     public Set<MessageModel> getMessages() {

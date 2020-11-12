@@ -7,4 +7,5 @@ public interface UsersService {
     UserModel create(UserModel u);
     UserModel findOneById(UUID id);
     List<UserModel> getAll();
+    UserModel findOneByEmail(String e);
 }
