@@ -1,7 +1,6 @@
 package com.fatec.chatapp.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fatec.chatapp.atividades.ActivityModel;
+import com.fatec.chatapp.activities.ActivityModel;
 
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.messages.MessageModel;

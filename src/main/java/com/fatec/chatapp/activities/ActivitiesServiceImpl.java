@@ -1,4 +1,4 @@
-package com.fatec.chatapp.atividades;
+package com.fatec.chatapp.activities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,29 +6,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-@Service("AtividadesService")
-public class AtividadesServiceImpl implements AtividadesService {
+@Service("ActivitiesService")
+public class ActivitiesServiceImpl implements ActivitiesService {
     @Autowired
-    AtividadesRepository atividadesRepository;
+    ActivitiesRepository activitiesRepository;
 
 
     @Override
     public ActivityModel create(ActivityModel a) {
-        return atividadesRepository.save(a);
+        return activitiesRepository.save(a);
     }
 
     @Override
     public void delete (ActivityModel a) {
-        atividadesRepository.delete(a);
+        activitiesRepository.delete(a);
     }
 
     @Override
     public List<ActivityModel> getAll() {
-        return atividadesRepository.findAll();
+        return activitiesRepository.findAll();
     }
 
     @Override
     public ActivityModel findOneById(UUID id) {
-        return atividadesRepository.findById(id);
+        return activitiesRepository.findById(id);
     }
 }

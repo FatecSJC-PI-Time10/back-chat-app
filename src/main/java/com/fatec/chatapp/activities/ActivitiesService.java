@@ -1,9 +1,9 @@
-package com.fatec.chatapp.atividades;
+package com.fatec.chatapp.activities;
 
 import  java.util.List;
 import java.util.UUID;
 
-public interface AtividadesService {
+public interface ActivitiesService {
     ActivityModel create(ActivityModel a);
     void delete(ActivityModel a);
     List<ActivityModel> getAll();

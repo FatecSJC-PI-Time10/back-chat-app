@@ -1,4 +1,4 @@
-package com.fatec.chatapp.atividades;
+package com.fatec.chatapp.activities;
 
 import com.fatec.chatapp.users.UserModel;
 import com.fatec.chatapp.users.UsersServiceImpl;
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ActivitiesController {
 
     @Autowired
-    AtividadesServiceImpl atividadesService;
+    ActivitiesServiceImpl atividadesService;
 
     @Autowired
     UsersServiceImpl userService;

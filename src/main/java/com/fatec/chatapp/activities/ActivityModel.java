@@ -1,4 +1,4 @@
-package com.fatec.chatapp.atividades;
+package com.fatec.chatapp.activities;
 
 import java.util.UUID;
 
