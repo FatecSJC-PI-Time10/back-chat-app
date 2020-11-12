@@ -1,7 +1,6 @@
 package com.fatec.chatapp.chats;
 
 import com.fatec.chatapp.messages.MessageModel;
-import com.fatec.chatapp.participants.ParticipantModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -27,9 +26,6 @@ public class ChatModel {
 
   @Column(name = "is_active")
   private Boolean isActive;
-
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
-  private Set<ParticipantModel> participants;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chat", fetch = FetchType.LAZY)
   private Set<MessageModel> messages;
@@ -70,14 +66,6 @@ public class ChatModel {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public Set<ParticipantModel> getParticipants() {
-    return participants;
-  }
-
-  public void setParticipants(Set<ParticipantModel> participants) {
-    this.participants = participants;
   }
 
   public Set<MessageModel> getMessages() {

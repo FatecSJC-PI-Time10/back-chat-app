@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(value = "Chats")
@@ -16,7 +17,7 @@ public class ChatsController {
     public ChatsServiceImpl chatService;
 
     @PostMapping
-    public ChatModel createChat(@RequestBody ChatModel body){
+    public ChatModel createChat(@Valid @RequestBody ChatModel body){
         return chatService.create(body);
     }
 
