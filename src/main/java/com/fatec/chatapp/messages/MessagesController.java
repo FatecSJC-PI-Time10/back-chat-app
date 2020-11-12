@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class MessagesController {
     UsersServiceImpl usersService;
 
     @PostMapping
-    public MessageModel createMessage(@RequestBody MessageDTO request) {
+    public MessageModel createMessage(@Valid @RequestBody MessageDTO request) {
         final UserModel userModel = usersService.findOneById(request.getUserId());
         final ChatModel chatModel = chatsService.findOneById(request.getChatId());
         final MessageModel model = new MessageModel(request.getBody(), userModel, chatModel);

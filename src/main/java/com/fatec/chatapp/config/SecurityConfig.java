@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -37,6 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/authentication", "/explorer/**", "/h2-console/**").permitAll()
             .antMatchers(HttpMethod.POST, "/users").permitAll()
             .antMatchers(HttpMethod.GET, "/users/**").authenticated()
+            .antMatchers("/atividades/**").authenticated()
+            .antMatchers("/chats/**").authenticated()
+            .antMatchers("/messages/**").authenticated()
+            .antMatchers("/participants/**").authenticated()
             .and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(authenticationRequestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -44,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   @Bean
-  public AuthenticationManager authenticationManagerBean() throws  Exception {
+  public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
 
