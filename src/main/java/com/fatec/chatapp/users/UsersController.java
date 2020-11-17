@@ -1,17 +1,17 @@
 package com.fatec.chatapp.users;
 
-import com.fatec.chatapp.authentication.MyUserDetails;
+import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.chats.ChatsServiceImpl;
+import com.fatec.chatapp.roles.RoleModel;
+import com.fatec.chatapp.roles.RolesServiceImpl;
 import com.fatec.chatapp.utils.JWTUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +25,12 @@ public class UsersController {
 
     @Autowired
     UsersServiceImpl usersService;
+
+    @Autowired
+    ChatsServiceImpl chatsService;
+
+    @Autowired
+    RolesServiceImpl rolesService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -49,4 +55,19 @@ public class UsersController {
         return ResponseEntity.ok(model);
     }
 
+    @PostMapping(value = "/{id}/chats")
+    public UserModel addChatToUser(@PathVariable("id") UUID userId, @RequestBody AddChatDTO body) {
+        final UserModel user = usersService.findOneById(userId);
+        final ChatModel chat = chatsService.findOneById(body.getChatId());
+
+        return usersService.addChat(user, chat);
+    }
+
+    @PostMapping(value = "/{id}/roles")
+    public UserModel addRoleToUser(@PathVariable("id") UUID userId, @RequestBody AddRoleDTO body) {
+        final UserModel user = usersService.findOneById(userId);
+        final RoleModel role = rolesService.findOneById(body.getRoleId());
+
+        return usersService.addRole(user, role);
+    }
 }
