@@ -17,7 +17,7 @@ public class ChatsController {
     public ChatsServiceImpl chatService;
 
     @PostMapping
-    public ChatModel createChat(@Valid @RequestBody ChatModel body){
+    public ChatModel createChat(@Valid @RequestBody ChatDTO body){
         return chatService.create(body);
     }
 

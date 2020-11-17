@@ -13,9 +13,9 @@ public class ChatsServiceImpl implements ChatsService {
     private ChatsRepository chatsRepository;
 
     @Override
-    public ChatModel create(ChatModel body) {
-
-        return chatsRepository.save(body);
+    public ChatModel create(ChatDTO body) {
+        final ChatModel model = new ChatModel(body.getName(), body.getISActive());
+        return chatsRepository.save(model);
     }
 
     @Override

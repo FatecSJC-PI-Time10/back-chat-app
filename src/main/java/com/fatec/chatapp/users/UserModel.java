@@ -4,6 +4,7 @@ import com.fatec.chatapp.activities.ActivityModel;
 
 import com.fatec.chatapp.chats.ChatModel;
 import com.fatec.chatapp.messages.MessageModel;
+import com.fatec.chatapp.roles.RoleModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -45,7 +46,7 @@ public class UserModel {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<RoleModel> roleModels = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -61,12 +62,12 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(String name, String cpf, String email, String password, HashSet<Role> roles) {
+    public UserModel(String name, String cpf, String email, String password, HashSet<RoleModel> roleModels) {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        this.roleModels = roleModels;
     }
 
     public UserModel(UUID id, String name, String cpf, String email, String password) {
@@ -141,11 +142,11 @@ public class UserModel {
         this.messages = messages;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<RoleModel> getRoles() {
+        return roleModels;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Set<RoleModel> roleModels) {
+        this.roleModels = roleModels;
     }
 }
