@@ -1,4 +1,4 @@
-package com.fatec.chatapp.users;
+package com.fatec.chatapp.roles;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class RoleModel {
   @Id
   @GeneratedValue(generator = "UUID")
   @GenericGenerator(
@@ -22,7 +22,11 @@ public class Role {
   @Column(name = "name")
   private String name;
 
-  public Role() {
+  public RoleModel() {
+  }
+
+  public RoleModel(String name) {
+    this.name = name;
   }
 
   public UUID getId() {
