@@ -1,6 +1,6 @@
 package com.fatec.chatapp.authentication;
 
-import com.fatec.chatapp.users.Role;
+import com.fatec.chatapp.roles.RoleModel;
 import com.fatec.chatapp.users.UserModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,11 +20,11 @@ public class MyUserDetails implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    Set<Role> roles = user.getRoles();
+    Set<RoleModel> roleModels = user.getRoles();
     List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-    for (Role role : roles) {
-      authorities.add(new SimpleGrantedAuthority(role.getName()));
+    for (RoleModel roleModel : roleModels) {
+      authorities.add(new SimpleGrantedAuthority(roleModel.getName()));
     }
 
     return authorities;
