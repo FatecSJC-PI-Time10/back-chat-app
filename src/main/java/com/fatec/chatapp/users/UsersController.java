@@ -70,4 +70,9 @@ public class UsersController {
 
         return usersService.addRole(user, role);
     }
+
+    @GetMapping(value = "/{id}/contacts")
+    public List<UserModel> getContacts(@PathVariable("id") UUID userId) {
+        return usersService.getContacts(userId);
+    }
 }
