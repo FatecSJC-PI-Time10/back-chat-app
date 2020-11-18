@@ -16,7 +16,6 @@ Entrar na pasta docker
 $ cd docker
 ```
 
-
 Rodar docker compose 
 
 ```
