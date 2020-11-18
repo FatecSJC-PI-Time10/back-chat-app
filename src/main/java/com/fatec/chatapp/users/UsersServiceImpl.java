@@ -72,4 +72,11 @@ public class UsersServiceImpl implements UsersService {
         u.getRoles().add(r);
         return usersRepository.save(u);
     }
+
+    @Override
+    public List<UserModel> getContacts(UUID id) {
+        List<UserModel> users = usersRepository.findAll();
+        users.removeIf(user -> user.getId().equals(id));
+        return users;
+    }
 }

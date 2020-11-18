@@ -14,4 +14,5 @@ public interface UsersService {
     UserModel updateById(UUID id, UserModel u);
     UserModel addChat(UserModel u, ChatModel c);
     UserModel addRole(UserModel u, RoleModel r);
+    List<UserModel> getContacts(UUID id);
 }
