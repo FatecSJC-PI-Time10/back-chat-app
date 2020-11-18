@@ -1,10 +1,12 @@
 package com.fatec.chatapp.roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class RolesServiceImpl implements RolesService {
   @Autowired
   RolesRepository rolesRepository;
