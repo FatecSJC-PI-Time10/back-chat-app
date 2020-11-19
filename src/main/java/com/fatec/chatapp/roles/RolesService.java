@@ -7,4 +7,5 @@ public interface RolesService {
   RoleModel create(RoleModel r);
   RoleModel findOneById(UUID id);
   List<RoleModel> getAll();
+  void deleteRole(RoleModel r);
 }

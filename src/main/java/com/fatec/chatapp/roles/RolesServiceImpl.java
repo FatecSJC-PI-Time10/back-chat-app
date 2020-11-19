@@ -25,4 +25,9 @@ public class RolesServiceImpl implements RolesService {
   public List<RoleModel> getAll() {
     return rolesRepository.findAll();
   }
+
+  @Override
+  public void deleteRole(RoleModel r) {
+    rolesRepository.delete(r);
+  }
 }

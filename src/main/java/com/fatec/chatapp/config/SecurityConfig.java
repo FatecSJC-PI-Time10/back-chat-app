@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/chats/**").authenticated()
             .antMatchers("/messages/**").authenticated()
             .antMatchers("/participants/**").authenticated()
+            .antMatchers("/roles/**").authenticated()
             .and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(authenticationRequestFilter, UsernamePasswordAuthenticationFilter.class);
