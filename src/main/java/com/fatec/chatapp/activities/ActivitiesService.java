@@ -8,4 +8,5 @@ public interface ActivitiesService {
     void delete(ActivityModel a);
     List<ActivityModel> getAll();
     ActivityModel findOneById(UUID id);
+    ActivityModel updateActivityById(UUID id, ActivityDTO a);
 }

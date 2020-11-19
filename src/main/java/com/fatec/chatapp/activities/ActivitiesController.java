@@ -48,8 +48,8 @@ public class ActivitiesController {
     }
 
     //Atualizar atividade
-    @PutMapping
-    public ActivityModel atualizarAtividadeModel(@RequestBody ActivityModel atividade) {
-        return atividadesService.create(atividade);
+    @PutMapping("{id}")
+    public ActivityModel updateActivity(@PathVariable UUID id, @RequestBody ActivityDTO body) {
+        return atividadesService.updateActivityById(id, body);
     }
 }

@@ -9,22 +9,21 @@ import java.util.UUID;
 @Service("chats")
 public class ChatsServiceImpl implements ChatsService {
 
-    @Autowired
-    private ChatsRepository chatsRepository;
+  @Autowired
+  private ChatsRepository chatsRepository;
 
-    @Override
-    public ChatModel create(ChatDTO body) {
-        final ChatModel model = new ChatModel(body.getName(), body.getISActive());
-        return chatsRepository.save(model);
-    }
+  @Override
+  public ChatModel create(ChatModel c) {
+    return chatsRepository.save(c);
+  }
 
-    @Override
-    public List<ChatModel> getAll() {
-        return chatsRepository.findAll();
-    }
+  @Override
+  public List<ChatModel> getAll() {
+    return chatsRepository.findAll();
+  }
 
-    @Override
-    public ChatModel findOneById(UUID id) {
-        return chatsRepository.findOneById(id);
-    }
+  @Override
+  public ChatModel findOneById(UUID id) {
+    return chatsRepository.findOneById(id);
+  }
 }

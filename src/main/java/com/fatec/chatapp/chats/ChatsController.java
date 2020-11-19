@@ -18,7 +18,8 @@ public class ChatsController {
 
     @PostMapping
     public ChatModel createChat(@Valid @RequestBody ChatDTO body){
-        return chatService.create(body);
+        final ChatModel model = new ChatModel(body.getName(), body.getISActive());
+        return chatService.create(model);
     }
 
     @GetMapping

@@ -31,4 +31,23 @@ public class ActivitiesServiceImpl implements ActivitiesService {
     public ActivityModel findOneById(UUID id) {
         return activitiesRepository.findById(id);
     }
+
+    @Override
+    public ActivityModel updateActivityById(UUID id, ActivityDTO a) {
+        final ActivityModel model = activitiesRepository.findById(id);
+
+        if(a.getTitle() != null) {
+            model.setTitle(a.getTitle());
+        }
+
+        if(a.getDescription() != null) {
+            model.setDescription(a.getDescription());
+        }
+
+        if(a.getIsActive() != null) {
+            model.setIsActive(a.getIsActive());
+        }
+
+        return activitiesRepository.save(model);
+    }
 }
