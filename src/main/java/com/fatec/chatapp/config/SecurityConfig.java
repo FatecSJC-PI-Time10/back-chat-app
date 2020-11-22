@@ -1,7 +1,7 @@
 package com.fatec.chatapp.config;
 
-import com.fatec.chatapp.authentication.MyUserDetailsService;
-import com.fatec.chatapp.authentication.AuthenticationRequestFilter;
+import com.fatec.chatapp.services.MyUserDetailsService;
+import com.fatec.chatapp.filters.AuthenticationRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

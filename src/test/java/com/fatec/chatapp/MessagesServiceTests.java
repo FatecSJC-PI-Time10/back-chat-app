@@ -1,10 +1,10 @@
 package com.fatec.chatapp;
 
-import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.messages.MessageModel;
-import com.fatec.chatapp.messages.MessagesRepository;
-import com.fatec.chatapp.messages.MessagesServiceImpl;
-import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.models.ChatModel;
+import com.fatec.chatapp.models.MessageModel;
+import com.fatec.chatapp.repositories.MessagesRepository;
+import com.fatec.chatapp.services.MessagesServiceImpl;
+import com.fatec.chatapp.models.UserModel;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
