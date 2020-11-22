@@ -1,7 +1,7 @@
 package com.fatec.chatapp.authentication;
 
-import com.fatec.chatapp.roles.RoleModel;
-import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.models.RoleModel;
+import com.fatec.chatapp.models.UserModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

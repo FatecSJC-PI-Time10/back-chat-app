@@ -1,7 +1,8 @@
 package com.fatec.chatapp.users;
 
-import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.roles.RoleModel;
+import com.fatec.chatapp.models.ChatModel;
+import com.fatec.chatapp.models.RoleModel;
+import com.fatec.chatapp.models.UserModel;
 
 import java.util.List;
 import java.util.UUID;

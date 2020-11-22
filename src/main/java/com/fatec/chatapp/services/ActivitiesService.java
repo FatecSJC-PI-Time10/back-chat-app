@@ -1,5 +1,7 @@
 package com.fatec.chatapp.activities;
 
+import com.fatec.chatapp.models.ActivityModel;
+
 import  java.util.List;
 import java.util.UUID;
 

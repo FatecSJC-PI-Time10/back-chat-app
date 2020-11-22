@@ -1,8 +1,9 @@
 package com.fatec.chatapp.messages;
 
-import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.models.ChatModel;
 import com.fatec.chatapp.chats.ChatsServiceImpl;
-import com.fatec.chatapp.users.UserModel;
+import com.fatec.chatapp.models.MessageModel;
+import com.fatec.chatapp.models.UserModel;
 import com.fatec.chatapp.users.UsersServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

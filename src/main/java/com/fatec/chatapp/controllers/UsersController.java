@@ -1,9 +1,13 @@
-package com.fatec.chatapp.users;
+package com.fatec.chatapp.controllers;
 
-import com.fatec.chatapp.chats.ChatModel;
+import com.fatec.chatapp.dtos.AddChatDTO;
+import com.fatec.chatapp.dtos.AddRoleDTO;
+import com.fatec.chatapp.models.ChatModel;
 import com.fatec.chatapp.chats.ChatsServiceImpl;
-import com.fatec.chatapp.roles.RoleModel;
+import com.fatec.chatapp.models.RoleModel;
+import com.fatec.chatapp.models.UserModel;
 import com.fatec.chatapp.roles.RolesServiceImpl;
+import com.fatec.chatapp.users.UsersServiceImpl;
 import com.fatec.chatapp.utils.JWTUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

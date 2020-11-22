@@ -1,5 +1,7 @@
 package com.fatec.chatapp.messages;
 
+import com.fatec.chatapp.models.MessageModel;
+
 import java.util.List;
 import java.util.UUID;
 

@@ -1,9 +1,9 @@
 package com.fatec.chatapp.users;
 
-import com.fatec.chatapp.activities.ActivityModel;
-import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.chats.ChatsServiceImpl;
-import com.fatec.chatapp.roles.RoleModel;
+import com.fatec.chatapp.models.ActivityModel;
+import com.fatec.chatapp.models.ChatModel;
+import com.fatec.chatapp.models.RoleModel;
+import com.fatec.chatapp.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

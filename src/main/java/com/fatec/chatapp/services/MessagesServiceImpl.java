@@ -1,6 +1,7 @@
 package com.fatec.chatapp.messages;
 
 import com.fatec.chatapp.chats.ChatsRepository;
+import com.fatec.chatapp.models.MessageModel;
 import com.fatec.chatapp.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

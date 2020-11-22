@@ -1,7 +1,7 @@
 package com.fatec.chatapp.authentication;
 
-import com.fatec.chatapp.users.UserModel;
-import com.fatec.chatapp.users.UsersRepository;
+import com.fatec.chatapp.models.UserModel;
+import com.fatec.chatapp.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
