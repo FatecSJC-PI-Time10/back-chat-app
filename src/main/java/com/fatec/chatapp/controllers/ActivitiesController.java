@@ -7,6 +7,7 @@ import com.fatec.chatapp.models.UserModel;
 import com.fatec.chatapp.services.UsersServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,40 +20,35 @@ import java.util.UUID;
 public class ActivitiesController {
 
     @Autowired
-    ActivitiesServiceImpl atividadesService;
+    ActivitiesServiceImpl activityService;
 
     @Autowired
     UsersServiceImpl userService;
 
-    //Listar Atividades
     @GetMapping
-    public List<ActivityModel> listarAtividades(){
-        return atividadesService.getAll();
+    public List<ActivityModel> getAll(){
+        return activityService.getAll();
     }
 
-    //Encontrar atividade por ID
     @GetMapping("/{id}")
-    public ActivityModel getAtividadeById(@PathVariable UUID id) {
-        return atividadesService.findOneById(id);
+    public ActivityModel getOneById(@PathVariable UUID id) {
+        return activityService.findOneById(id);
     }
 
-    //Salvar atividade
     @PostMapping
-    public ActivityModel salvaAtividadeModel(@Valid @RequestBody ActivityDTO activity) {
+    public ActivityModel create(@Valid @RequestBody ActivityDTO activity) {
         UserModel usuario = userService.findOneById(activity.getUserId());
         ActivityModel model = new ActivityModel(activity.getTitle(), activity.getDescription(), usuario, activity.getIsActive());
-        return atividadesService.create(model);
+        return activityService.create(model);
     }
 
-    //Deletar atividade
-    @DeleteMapping
-    public void deleteAtividade (@RequestBody ActivityModel atividade) {
-        atividadesService.delete(atividade);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete (@PathVariable("id") UUID id) {
+        return ResponseEntity.ok(activityService.delete(id));
     }
 
-    //Atualizar atividade
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ActivityModel updateActivity(@PathVariable UUID id, @RequestBody ActivityDTO body) {
-        return atividadesService.updateActivityById(id, body);
+        return activityService.updateActivityById(id, body);
     }
 }

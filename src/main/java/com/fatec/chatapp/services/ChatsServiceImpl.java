@@ -29,4 +29,12 @@ public class ChatsServiceImpl implements ChatsService {
   public ChatModel findOneById(UUID id) {
     return chatsRepository.findOneById(id);
   }
+
+  @Override
+  public Boolean delete(UUID id) {
+    final ChatModel chat = chatsRepository.findOneById(id);
+    chatsRepository.delete(chat);
+
+    return true;
+  }
 }

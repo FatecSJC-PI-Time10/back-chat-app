@@ -9,4 +9,5 @@ public interface ChatsService {
      ChatModel create(ChatModel c);
      List<ChatModel> getAll();
      ChatModel findOneById(UUID id);
+     Boolean delete(UUID id);
 }
