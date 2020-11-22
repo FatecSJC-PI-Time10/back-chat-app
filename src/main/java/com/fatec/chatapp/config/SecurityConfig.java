@@ -1,7 +1,7 @@
 package com.fatec.chatapp.config;
 
-import com.fatec.chatapp.authentication.MyUserDetailsService;
-import com.fatec.chatapp.authentication.AuthenticationRequestFilter;
+import com.fatec.chatapp.services.MyUserDetailsService;
+import com.fatec.chatapp.filters.AuthenticationRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/chats/**").authenticated()
             .antMatchers("/messages/**").authenticated()
             .antMatchers("/participants/**").authenticated()
+            .antMatchers("/roles/**").authenticated()
             .and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(authenticationRequestFilter, UsernamePasswordAuthenticationFilter.class);
