@@ -10,6 +10,7 @@ import com.fatec.chatapp.services.MessagesServiceImpl;
 import com.fatec.chatapp.services.UsersServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @Api(value = "Chats")
 @RestController
@@ -49,11 +51,16 @@ public class ChatsController {
   }
 
   @MessageMapping("chat")
-  public void processMessage(@Payload MessageDTO body) {
+  public void sendMessage(@Payload MessageDTO body) {
     final MessageModel message = messagesService.create(body);
 
     messagingTemplate.convertAndSendToUser(
             body.getChatId().toString(), "/queue/messages",
             message);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Boolean> delete(@PathVariable("id") UUID chatId) {
+    return ResponseEntity.ok(chatService.delete(chatId));
   }
 }

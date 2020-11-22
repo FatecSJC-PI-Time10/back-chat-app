@@ -21,8 +21,10 @@ public class ActivitiesServiceImpl implements ActivitiesService {
     }
 
     @Override
-    public void delete (ActivityModel a) {
-        activitiesRepository.delete(a);
+    public Boolean delete (UUID id) {
+        final ActivityModel model = activitiesRepository.findById(id);
+        activitiesRepository.delete(model);
+        return true;
     }
 
     @Override

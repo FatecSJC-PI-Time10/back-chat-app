@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface ActivitiesService {
     ActivityModel create(ActivityModel a);
-    void delete(ActivityModel a);
+    Boolean delete(UUID id);
     List<ActivityModel> getAll();
     ActivityModel findOneById(UUID id);
     ActivityModel updateActivityById(UUID id, ActivityDTO a);
