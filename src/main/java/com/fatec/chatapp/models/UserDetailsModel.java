@@ -1,4 +1,4 @@
-package com.fatec.chatapp.authentication;
+package com.fatec.chatapp.models;
 
 import com.fatec.chatapp.models.RoleModel;
 import com.fatec.chatapp.models.UserModel;
@@ -11,10 +11,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class MyUserDetails implements UserDetails {
+public class UserDetailsModel implements UserDetails {
   private final UserModel user;
 
-  public MyUserDetails(UserModel user) {
+  public UserDetailsModel(UserModel user) {
     this.user = user;
   }
 

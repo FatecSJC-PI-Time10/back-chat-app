@@ -1,4 +1,4 @@
-package com.fatec.chatapp.activities;
+package com.fatec.chatapp.models;
 
 import java.util.UUID;
 
@@ -14,8 +14,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-
-import com.fatec.chatapp.users.UserModel;
 
 @Entity
 @Table(name = "activity")

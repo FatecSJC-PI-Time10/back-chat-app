@@ -1,10 +1,13 @@
 package com.fatec.chatapp.controllers;
 
 
-import com.fatec.chatapp.chats.ChatsServiceImpl;
+import com.fatec.chatapp.dtos.MessageDTO;
+import com.fatec.chatapp.models.MessageModel;
+import com.fatec.chatapp.services.ChatsServiceImpl;
 import com.fatec.chatapp.dtos.ChatDTO;
 import com.fatec.chatapp.models.ChatModel;
-import com.fatec.chatapp.models.MessageModel;
+import com.fatec.chatapp.services.MessagesServiceImpl;
+import com.fatec.chatapp.services.UsersServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -19,30 +22,38 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/chats")
 public class ChatsController {
-    @Autowired private SimpMessagingTemplate messagingTemplate;
+  @Autowired
+  private ChatsServiceImpl chatsService;
 
-    @Autowired
-    public ChatsServiceImpl chatService;
+  @Autowired
+  private UsersServiceImpl usersService;
 
-    @PostMapping
-    public ChatModel createChat(@Valid @RequestBody ChatDTO body){
-        final ChatModel model = new ChatModel(body.getName(), body.getISActive());
-        return chatService.create(model);
-    }
+  @Autowired
+  private MessagesServiceImpl messagesService;
 
-    @GetMapping
-    public List<ChatModel> getAllChats(){
-        return chatService.getAll();
-    }
+  @Autowired
+  private SimpMessagingTemplate messagingTemplate;
 
-    @MessageMapping("/chat")
-    public void processMessage(@Payload MessageModel messageModel) {
+  @Autowired
+  public ChatsServiceImpl chatService;
 
-//        messagingTemplate.convertAndSendToUser(
-//                chatMessage.getRecipientId(),"/queue/messages",
-//                new ChatNotification(
-//                        saved.getId(),
-//                        saved.getSenderId(),
-//                        saved.getSenderName()));
-    }
+  @PostMapping
+  public ChatModel createChat(@Valid @RequestBody ChatDTO body) {
+    final ChatModel model = new ChatModel(body.getName(), body.getISActive());
+    return chatService.create(model);
+  }
+
+  @GetMapping
+  public List<ChatModel> getAllChats() {
+    return chatService.getAll();
+  }
+
+  @MessageMapping("chat")
+  public void processMessage(@Payload MessageDTO body) {
+    final MessageModel message = messagesService.create(body);
+
+    messagingTemplate.convertAndSendToUser(
+            body.getChatId().toString(), "/queue/messages",
+            message);
+  }
 }

@@ -1,5 +1,6 @@
-package com.fatec.chatapp.authentication;
+package com.fatec.chatapp.services;
 
+import com.fatec.chatapp.models.UserDetailsModel;
 import com.fatec.chatapp.models.UserModel;
 import com.fatec.chatapp.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,6 @@ public class MyUserDetailsService implements UserDetailsService {
       throw  new UsernameNotFoundException("User name not found!");
     }
 
-    return new MyUserDetails(user);
+    return new UserDetailsModel(user);
   }
 }

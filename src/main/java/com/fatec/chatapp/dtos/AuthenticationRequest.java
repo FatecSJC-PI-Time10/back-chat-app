@@ -1,4 +1,4 @@
-package com.fatec.chatapp.authentication;
+package com.fatec.chatapp.dtos;
 
 public class AuthenticationRequest {
   private String username;

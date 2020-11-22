@@ -1,10 +1,10 @@
-package com.fatec.chatapp.messages;
+package com.fatec.chatapp.controllers;
 
-import com.fatec.chatapp.models.ChatModel;
-import com.fatec.chatapp.chats.ChatsServiceImpl;
+import com.fatec.chatapp.dtos.MessageDTO;
+import com.fatec.chatapp.services.MessagesServiceImpl;
+import com.fatec.chatapp.services.ChatsServiceImpl;
 import com.fatec.chatapp.models.MessageModel;
-import com.fatec.chatapp.models.UserModel;
-import com.fatec.chatapp.users.UsersServiceImpl;
+import com.fatec.chatapp.services.UsersServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +27,8 @@ public class MessagesController {
     UsersServiceImpl usersService;
 
     @PostMapping
-    public MessageModel createMessage(@Valid @RequestBody MessageDTO request) {
-        final UserModel userModel = usersService.findOneById(request.getUserId());
-        final ChatModel chatModel = chatsService.findOneById(request.getChatId());
-        final MessageModel model = new MessageModel(request.getBody(), userModel, chatModel);
-
-        return messagesService.create(model);
+    public MessageModel createMessage(@Valid @RequestBody MessageDTO body) {
+        return messagesService.create(body);
     }
 
     @GetMapping

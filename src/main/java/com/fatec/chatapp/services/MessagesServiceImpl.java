@@ -1,8 +1,12 @@
-package com.fatec.chatapp.messages;
+package com.fatec.chatapp.services;
 
-import com.fatec.chatapp.chats.ChatsRepository;
+import com.fatec.chatapp.dtos.MessageDTO;
+import com.fatec.chatapp.models.ChatModel;
+import com.fatec.chatapp.models.UserModel;
+import com.fatec.chatapp.repositories.ChatsRepository;
 import com.fatec.chatapp.models.MessageModel;
-import com.fatec.chatapp.users.UsersRepository;
+import com.fatec.chatapp.repositories.MessagesRepository;
+import com.fatec.chatapp.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +25,14 @@ public class MessagesServiceImpl implements MessagesService {
     ChatsRepository chatsRepository;
 
     @Override
-    public MessageModel create(MessageModel m) {
-        return messagesRepository.save(m);
+    public MessageModel create(MessageDTO m) {
+        final UserModel user = usersRepository.findOneById(m.getUserId());
+
+        final ChatModel chat = chatsRepository.findOneById(m.getChatId());
+
+        final MessageModel message = new MessageModel(m.getBody(), user, chat);
+
+        return messagesRepository.save(message);
     }
 
     @Override

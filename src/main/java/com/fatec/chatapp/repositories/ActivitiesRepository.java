@@ -1,4 +1,4 @@
-package com.fatec.chatapp.activities;
+package com.fatec.chatapp.repositories;
 
 import com.fatec.chatapp.models.ActivityModel;
 import org.springframework.data.jpa.repository.JpaRepository;

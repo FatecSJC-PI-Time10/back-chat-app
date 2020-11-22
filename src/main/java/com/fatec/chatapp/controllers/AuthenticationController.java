@@ -1,8 +1,8 @@
 package com.fatec.chatapp.controllers;
 
-import com.fatec.chatapp.authentication.AuthenticationRequest;
-import com.fatec.chatapp.authentication.AuthenticationResponse;
-import com.fatec.chatapp.authentication.MyUserDetailsService;
+import com.fatec.chatapp.dtos.AuthenticationRequest;
+import com.fatec.chatapp.dtos.AuthenticationResponse;
+import com.fatec.chatapp.services.MyUserDetailsService;
 import com.fatec.chatapp.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,7 @@
-package com.fatec.chatapp.activities;
+package com.fatec.chatapp.controllers;
 
+import com.fatec.chatapp.services.ActivitiesServiceImpl;
+import com.fatec.chatapp.dtos.ActivityDTO;
 import com.fatec.chatapp.models.ActivityModel;
 import com.fatec.chatapp.models.UserModel;
 import com.fatec.chatapp.services.UsersServiceImpl;

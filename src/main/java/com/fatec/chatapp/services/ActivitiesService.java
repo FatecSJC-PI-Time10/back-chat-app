@@ -1,5 +1,6 @@
-package com.fatec.chatapp.activities;
+package com.fatec.chatapp.services;
 
+import com.fatec.chatapp.dtos.ActivityDTO;
 import com.fatec.chatapp.models.ActivityModel;
 
 import  java.util.List;

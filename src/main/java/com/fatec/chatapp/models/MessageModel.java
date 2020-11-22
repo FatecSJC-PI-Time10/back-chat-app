@@ -1,8 +1,6 @@
-package com.fatec.chatapp.messages;
+package com.fatec.chatapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.users.UserModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 

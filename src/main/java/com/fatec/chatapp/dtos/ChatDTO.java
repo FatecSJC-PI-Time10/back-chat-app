@@ -1,4 +1,4 @@
-package com.fatec.chatapp.chats;
+package com.fatec.chatapp.dtos;
 
 public class ChatDTO {
   private String name;

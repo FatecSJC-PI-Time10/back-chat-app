@@ -1,10 +1,10 @@
-package com.fatec.chatapp.users;
+package com.fatec.chatapp.models;
 
-import com.fatec.chatapp.activities.ActivityModel;
+import com.fatec.chatapp.models.ActivityModel;
 
-import com.fatec.chatapp.chats.ChatModel;
-import com.fatec.chatapp.messages.MessageModel;
-import com.fatec.chatapp.roles.RoleModel;
+import com.fatec.chatapp.models.ChatModel;
+import com.fatec.chatapp.models.MessageModel;
+import com.fatec.chatapp.models.RoleModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 

@@ -1,5 +1,6 @@
-package com.fatec.chatapp.authentication;
+package com.fatec.chatapp.filters;
 
+import com.fatec.chatapp.services.MyUserDetailsService;
 import com.fatec.chatapp.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

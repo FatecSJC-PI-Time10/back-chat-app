@@ -1,4 +1,4 @@
-package com.fatec.chatapp.users;
+package com.fatec.chatapp.services;
 
 import com.fatec.chatapp.models.ChatModel;
 import com.fatec.chatapp.models.RoleModel;

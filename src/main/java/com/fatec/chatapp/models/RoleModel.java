@@ -1,4 +1,4 @@
-package com.fatec.chatapp.roles;
+package com.fatec.chatapp.models;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;

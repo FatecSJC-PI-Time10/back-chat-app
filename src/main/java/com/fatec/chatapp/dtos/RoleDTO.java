@@ -1,4 +1,4 @@
-package com.fatec.chatapp.roles;
+package com.fatec.chatapp.dtos;
 
 public class RoleDTO {
   private String name;

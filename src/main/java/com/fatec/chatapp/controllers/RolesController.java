@@ -1,6 +1,8 @@
-package com.fatec.chatapp.roles;
+package com.fatec.chatapp.controllers;
 
+import com.fatec.chatapp.dtos.RoleDTO;
 import com.fatec.chatapp.models.RoleModel;
+import com.fatec.chatapp.services.RolesServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

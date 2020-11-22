@@ -1,4 +1,4 @@
-package com.fatec.chatapp.users;
+package com.fatec.chatapp.dtos;
 
 import java.util.UUID;
 

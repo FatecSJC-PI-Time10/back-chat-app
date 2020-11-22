@@ -1,6 +1,6 @@
-package com.fatec.chatapp.chats;
+package com.fatec.chatapp.models;
 
-import com.fatec.chatapp.messages.MessageModel;
+import com.fatec.chatapp.models.MessageModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 

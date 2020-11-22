@@ -1,4 +1,4 @@
-package com.fatec.chatapp.messages;
+package com.fatec.chatapp.repositories;
 
 import com.fatec.chatapp.models.MessageModel;
 import org.springframework.data.jpa.repository.JpaRepository;

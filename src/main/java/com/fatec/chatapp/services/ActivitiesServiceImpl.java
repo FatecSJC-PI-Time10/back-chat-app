@@ -1,6 +1,8 @@
-package com.fatec.chatapp.activities;
+package com.fatec.chatapp.services;
 
+import com.fatec.chatapp.dtos.ActivityDTO;
 import com.fatec.chatapp.models.ActivityModel;
+import com.fatec.chatapp.repositories.ActivitiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
