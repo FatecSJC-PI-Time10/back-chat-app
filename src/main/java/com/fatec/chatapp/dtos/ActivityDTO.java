@@ -5,17 +5,19 @@ import java.util.UUID;
 public class ActivityDTO {
     private UUID userId;
     private String title;
+    private String date;
     private String description;
     private Boolean isActive;
 
     public ActivityDTO() {
     }
 
-    public ActivityDTO(UUID userId, String title, String description, Boolean isActive) {
+    public ActivityDTO(UUID userId, String title, String description, Boolean isActive, String date) {
         this.userId = userId;
         this.title = title;
         this.description = description;
         this.isActive = isActive;
+        this.date = date;
     }
 
     public UUID getUserId() {
@@ -48,5 +50,13 @@ public class ActivityDTO {
 
     public void setIsActive(Boolean active) {
         isActive = active;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,8 +39,9 @@ public class ActivitiesController {
 
     @PostMapping
     public ActivityModel create(@Valid @RequestBody ActivityDTO activity) {
-        UserModel usuario = userService.findOneById(activity.getUserId());
-        ActivityModel model = new ActivityModel(activity.getTitle(), activity.getDescription(), usuario, activity.getIsActive());
+        UserModel user = userService.findOneById(activity.getUserId());
+        final LocalDate date = LocalDate.parse(activity.getDate(), DateTimeFormatter.BASIC_ISO_DATE);
+        ActivityModel model = new ActivityModel(activity.getTitle(), activity.getDescription(), user, activity.getIsActive(), date);
         return activityService.create(model);
     }
 
