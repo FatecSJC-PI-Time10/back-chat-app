@@ -42,7 +42,7 @@ public class ActivityModel {
 
     @Column(name = "date")
     private LocalDate date;
-
+  
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
