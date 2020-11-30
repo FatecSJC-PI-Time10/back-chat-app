@@ -33,6 +33,10 @@ public class MessageModel {
     @JoinColumn(name="chat_id")
     private ChatModel chat;
 
+    private UUID senderId;
+
+    private String senderName;
+
     public MessageModel() { }
 
     public MessageModel(String body) {
@@ -81,6 +85,22 @@ public class MessageModel {
 
     public void setChat(ChatModel chat) {
         this.chat = chat;
+    }
+
+    public UUID getSenderId() {
+        return this.user.getId();
+    }
+
+    public void setSenderId(UUID senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getSenderName() {
+        return this.user.getName();
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
     @Override
